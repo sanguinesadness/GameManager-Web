@@ -1,0 +1,82 @@
+@model GameManager.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_Layout";
+}
+
+<div class="reg-form">
+    <div class="reg-form__content">
+        <h2 class="title">Game manager</h2>
+        <p>Введите данные для регистрации нового пользователя:</p>
+        <form method="post" asp-controller="Account" asp-action="Register" name="reg">
+            <div class="input-grid" asp-validation-summary="None">
+                <div class="input-box">
+                    <input asp-for="UserName" type="text" placeholder="Имя пользователя" tabindex="1">
+                    <span class="error-label">
+                        <span class="icon"></span>
+                        <span class="text" asp-validation-for="UserName"></span>
+                    </span>
+                </div>
+                <div class="input-box">
+                    <input asp-for="Email" type="email" placeholder="Электронная почта" tabindex="4">
+                    <span class="error-label">
+                        <span class="icon"></span>
+                        <span class="text" asp-validation-for="Email"></span>
+                    </span>
+                </div>
+                <div class="input-box">
+                    <input asp-for="Password" type="password" placeholder="Пароль" tabindex="2">
+                    <span class="error-label">
+                        <span class="icon"></span>
+                        <span class="text" asp-validation-for="Password"></span>
+                    </span>
+                </div>
+                <div class="input-box">
+                    <input asp-for="BirthDate" type="date" placeholder="Дата рождения" value="" min="1900-01-01" onChange="this.setAttribute('value', this.value)" tabindex="5">
+                    <span class="error-label">
+                        <span class="icon"></span>
+                        <span class="text" asp-validation-for="BirthDate"></span>
+                    </span>
+                </div>
+                <div class="input-box">
+                    <input asp-for="PasswordConfirm" type="password" placeholder="Повторите пароль" tabindex="3">
+                    <span class="error-label">
+                        <span class="icon"></span>
+                        <span class="text" asp-validation-for="PasswordConfirm"></span>
+                    </span>
+                </div>
+                <div class="input-box">
+                    <div class="gender-selection" tabindex="6">
+                        <span>Пол:</span>
+                        <input type="radio" name="genderRadioButton" id="gender-male" value="Муж" genderId="1">
+                        <input type="radio" name="genderRadioButton" id="gender-female" value="Жен" genderId="2">
+                        <input type="radio" name="genderRadioButton" id="gender-other" value="Другое" genderId="3">
+                        <input hidden asp-for="Gender" id="gender-result" />
+                    </div>
+                    <span class="error-label">
+                        <span class="icon"></span>
+                        <span class="text" asp-validation-for="Gender"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="buttons">
+                <a class="button" asp-controller="Account" asp-action="Login" tabindex="8">У меня уже есть аккаунт</a>
+                <button class="reg-button accent" type="submit" tabindex="7">Регистрация</button>
+            </div>
+        </form>
+    </div>
+
+    @if (Model.IsSucceeded)
+    {
+        <div class="dialog-wrapper">
+            <div class="dialog-box">
+                <h3 class="dialog-box__title success">Успешная регистрация</h3>
+                <p class="dialog-box__message">Пользователь <b>@Model.UserName</b> успешно зарегистрирован.</p>
+                <a class="button dialog-box__button accent" asp-action="Login" asp-controller="Account">К авторизации</a>
+            </div>
+        </div>
+    }
+</div>
+
+<script src="~/js/setMaxDate.js" asp-append-version="true"></script>
+<script src="~/js/toggleGenderValue.js" asp-append-version="true"></script>

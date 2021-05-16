@@ -1,0 +1,31 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div class="player-form">
+    <div class="navbar">
+        <div class="navbar__first-group">
+            <a class="navbar__item selected" asp-action="" asp-controller="">
+                <span>Мои персонажи</span>
+            </a>
+            <a class="navbar__item" asp-action="" asp-controller="">
+                <span>Игра</span>
+            </a>
+            <a class="navbar__item" asp-action="" asp-controller="">
+                <span>Магазин</span>
+            </a>
+        </div>
+        <div class="navbar__second-group">
+            <a class="navbar__item" asp-action="" asp-controller="">
+                <img src="~/icons/svg/settings.svg" alt="" />
+            </a>
+            <a class="navbar__item" asp-action="" asp-controller="">
+                <img src="~/icons/svg/user.svg" alt="" />
+            </a>
+        </div>
+    </div>
+
+    <div class="player_form__content">
+        @RenderBody()
+    </div>
+</div>

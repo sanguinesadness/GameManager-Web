@@ -1,0 +1,94 @@
+﻿@{ 
+    ViewData["Title"] = "My Characters";
+    Layout = "_PlayerLayout";
+}
+
+@{
+    if (!User.Identity.IsAuthenticated) 
+    {
+        <h1>No account</h1>
+    }
+    else {
+        <div class="my-characters-page">
+            <section class="left-section">
+                <span class="title">Список персонажей</span>
+                <div class="characters-list middle-block">
+                    <div class="character-item">
+                        <div class="character">
+                            <img class="character__icon" src="~/pictures/hero_icons/lina.png" alt="">
+                            <h4 class="character__name">player123</h4>
+                        </div>
+                    </div>
+                    <div class="character-item selected">
+                        <div class="character">
+                            <img class="character__icon" src="~/pictures/hero_icons/antimage.png" alt="">
+                            <h4 class="character__name">mageSlayer</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button class="create-character-button flat">Создать персонажа</button>
+                </div>
+            </section>
+
+            <section class="right-section">
+                <span class="title">Информация о персонаже</span>
+                <div class="character-info middle-block">
+                    <table class="character-info__table">
+                        <tr class="row-status">
+                            <td class="row-status__title">Статус:</td>
+                            <td class="row-status__value">Активен</td>
+                        </tr>
+                        <tr class="row-location">
+                            <td class="row-location__title">Локация:</td>
+                            <td class="row-location__value">Тельдрассил</td>
+                        </tr>
+                        <tr class="row-level">
+                            <td class="row-level__title">Уровень:</td>
+                            <td class="row-level__value">24</td>
+                        </tr>
+                        <tr class="row-class">
+                            <td class="row-class__title">Класс:</td>
+                            <td class="row-class__value">Интеллект</td> 
+                        </tr>
+                        <tr class="row-hours">
+                            <td class="row-hours__title">Часов в игре:</td>
+                            <td class="row-hours__value">108</td>
+                        </tr>
+                    </table>
+                    <div class="character-info__main">
+                        <div>
+                            <div class="gold-balance">
+                                <span class="gold-balance__title">
+                                    <img src="~/icons/svg/coins.svg" alt="">
+                                    <span>Золото</span>
+                                </span>
+                                <h1 class="gold-balance__value">2507</h1>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="rating-scores">
+                                <span class="rating-scores__title">
+                                    <img src="~/icons/svg/rating.svg" alt="">
+                                    <span>Рейтинг</span>
+                                </span>
+                                <h1 class="rating-scores__value">180133</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="creation-date">
+                        <span class="creation-date__title">Дата создания:</span>
+                        <span class="creation-date__value">24.04.2018</span>
+                    </div>
+                    <button class="delete-character-button accent without-hover-up">Удалить персонажа</button>
+                </div>
+            </section>
+
+            @* Decorative blocks on top and bottom *@
+            <div class="top-line"></div>
+            <div class="bottom-line"></div>
+        </div>
+    }
+}
