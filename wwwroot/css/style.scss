@@ -110,6 +110,29 @@ $pinky: #F80086;
     }
 }
 
+@keyframes expand-right {
+    0% {
+        width: 0;
+        left: 0;
+    }
+
+    100% {
+        width: 100%;
+        left: 0;
+    }
+}
+
+@keyframes hide-left {
+    0% {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     font-size: 19px;
@@ -157,6 +180,10 @@ input[type="date"] {
             opacity: 0.8;
             font-weight: 500;
         }
+    }
+
+    &.without-hover-up {
+        transform: unset;
     }
 }
 
@@ -249,14 +276,14 @@ button, .button {
         @include hover-up(0, 0);
 
         &:hover {
-            background: rgba($color: white, $alpha: 0.3);
+            background: #ebe2ff;
         }
     }
 
     &.without-hover-up {
         transition: 300ms transform ease;
         transform: unset;
-
+    
         &:active {
             transform: scale(1.1);
         }
@@ -459,6 +486,34 @@ button, .button {
     overflow: hidden;
     box-shadow: 0 0 50px $gray;
 
+    .info {
+        .middle-block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 150px 50px 150px;
+
+            .info__icon {
+                height: 60px;
+                width: 60px;
+                margin-bottom: 10px;
+            }
+
+            .info__text {
+                color: $dark-gray;
+            }
+        }
+
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
     .login-form {
         @include small-block;
         display: flex;
@@ -618,7 +673,7 @@ button, .button {
                 font-weight: 500;
                 justify-content: center;
                 text-align: center;
-                text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
+                text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
                 transition: 500ms all;
 
                 transition: 200ms background;
@@ -637,43 +692,66 @@ button, .button {
             background: white;
             height: calc(100% - #{$navbar-height});
 
-            .my-characters-page {
+            $top-line-height: 9%;
+            $bottom-line-height: 13%;
+            $middle-height: calc(100% - #{$top-line-height} - #{$bottom-line-height});
+
+            & > * {
+                .title {
+                    height: $top-line-height;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 500;
+                    font-size: 0.95em;
+                }
+    
+                .middle-block {
+                    height: $middle-height;
+                }
+    
+                .footer {
+                    height: $bottom-line-height;
+                    width: 100%;
+                }
+
+                .top-line, .bottom-line {
+                    background: $light;
+                    position: absolute;
+                    z-index: 1;
+                    width: 100%;
+                }
+
+                .top-line {
+                    height: $top-line-height;
+                    top: 0;
+                }
+
+                .bottom-line {
+                    height: $bottom-line-height;
+                    bottom: 0;
+                }
+
+                .left-section, .right-section, .middle-section {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    z-index: 2;
+                }
+            }
+
+            .my-characters-page, .game-page, .shop-page {
                 display: flex;
                 flex-direction: row;
                 height: 100%;
                 width: 100%;
                 position: relative;
-                $top-line-height: 9%;
-                $bottom-line-height: 13%;
-                $middle-height: calc(100% - #{$top-line-height} - #{$bottom-line-height});
+            }
 
-                .left-section, .right-section {
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    z-index: 2;
-
-                    .title {
-                        height: $top-line-height;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        font-weight: 500;
-                        font-size: 0.95em;
-                    }
-
-                    .middle-block {
-                        height: $middle-height;
-                    }
-
-                    .footer {
-                        height: $bottom-line-height;
-                        width: 100%;
-                    }
-                }
-
+            .my-characters-page {
                 .left-section {
                     width: $left-section-width;
+                    z-index: 3;
 
                     .characters-list {
                         padding: 30px 0;
@@ -684,6 +762,10 @@ button, .button {
                             align-items: center;
                             padding: 20px 0;
                             position: relative;
+
+                            &:nth-child(1) {
+                                padding-top: 10px;
+                            }
 
                             .character {
                                 display: flex;
@@ -702,13 +784,15 @@ button, .button {
                                     height: 42px;
                                     border-radius: 12px;
                                     margin-left: 12px;
+                                    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
                                 }
 
                                 .character__name {
                                     color: white;
-                                    font-weight: 500;
+                                    font-weight: 600;
                                     font-size: 1.1em;
                                     width: 190px;
+                                    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
                                 }
 
                                 &:active {
@@ -716,14 +800,20 @@ button, .button {
                                 }
                             }
 
-                            &.selected::after {
+                            &::after {
                                 position: absolute;
                                 background: #C7A8FF;
                                 height: 36px;
-                                width: 100%;
+                                width: 0;
                                 content: "";
                                 z-index: -1;
                                 border-radius: 0 10px 10px 0;
+                                animation: hide-left 500ms;
+                            }
+
+                            &.selected::after {
+                                animation: expand-right 500ms ease;
+                                width: 100%;
                             }
                         }
                     }
@@ -737,142 +827,576 @@ button, .button {
                 .right-section {
                     width: calc(100% - #{$left-section-width});
                     $padding-left: 75px;
+                    position: relative;
+                    z-index: 2;
+                    overflow: hidden;
 
-                    .character-info {
-                        font-size: 21px;
-                        padding: 40px 0;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
+                    .footer button {
+                        padding: 14px 30px;
+                    }
 
-                        table.character-info__table {
-                            width: 100%;
+                    .info, .characters, .heroes {
+                        height: 100%;
+                        width: 100%;
+                        position: absolute;
+                    }
 
-                            tr {
+                    .characters {
+                        display: none;
+
+                        .character-info {
+                            font-size: 21px;
+                            padding: 40px 0;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+    
+                            table.character-info__table {
                                 width: 100%;
-
-                                td {
-                                    padding: 10px 0;
-
+    
+                                tr {
+                                    width: 100%;
+    
+                                    td {
+                                        padding: 10px 0;
+    
+                                        &:nth-child(1) {
+                                            padding-left: $padding-left;
+                                        }
+    
+                                        &:nth-child(2) {
+                                            font-weight: 700;
+                                        }
+    
+                                        &.row-status__value {
+                                            color: $green;
+                                        }
+                                    }
+                                }
+                            }
+    
+                            .character-info__main {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                margin-bottom: 15px;
+    
+                                & > div {
+                                    width: 50%;
+    
+                                    .gold-balance, .rating-scores {
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        width: 170px;
+        
+                                        & > :nth-child(1) {
+                                            display: flex;
+                                            flex-direction: row;
+                                            align-items: center;
+        
+                                            img {
+                                                width: 50px;
+                                                height: 50px;
+                                            }
+    
+                                            span {
+                                                font-size: 28px;
+                                                padding-left: 15px;
+                                            }
+                                        }
+    
+                                        & > :nth-child(2) {
+                                            text-align: center;
+                                            margin-top: 10px;
+                                            font-size: 44px;
+                                            font-weight: 800;
+                                        }
+                                    }
+    
+                                    .gold-balance .gold-balance__value {
+                                        color: gold;
+                                        -webkit-text-stroke: 1px black;
+                                        letter-spacing: 2px;
+                                    }
+    
+                                    .rating-scores .rating-scores__value {
+                                        color: $pinky;
+                                        -webkit-text-stroke: 1px black;
+                                        letter-spacing: 2px;
+                                    }
+        
                                     &:nth-child(1) {
-                                        padding-left: $padding-left;
+                                        margin-left: $padding-left;
                                     }
-
+    
                                     &:nth-child(2) {
-                                        font-weight: 700;
-                                    }
-
-                                    &.row-status__value {
-                                        color: $green;
+                                        padding-left: 40px;
                                     }
                                 }
                             }
                         }
-
-                        .character-info__main {
+    
+                        .footer {
+                            padding-left: $padding-left;
                             display: flex;
                             flex-direction: row;
-                            justify-content: space-between;
-                            margin-bottom: 15px;
-
-                            & > div {
+                            align-items: center;
+    
+                            .creation-date {
                                 width: 50%;
+                                
+                                .creation-date__title {
+                                    color: rgba(0, 0, 0, 0.5);
+                                    font-weight: 500;
+                                }
+    
+                                .creation-date__value {
+                                    margin-left: 30px;
+                                    font-weight: 700;
+                                    color: rgba(0, 0, 0, 0.5);
+                                }
+                            }
+    
+                            .delete-character-button {
+                                margin-left: 40px;
+                            }
+                        }
+                    }
 
-                                .gold-balance, .rating-scores {
+                    .heroes {       
+                        display: none;
+
+                        .hero-selection {
+                            .hero-selection__grid {
+                                padding: 40px 50px;
+                                display: grid;
+                                grid-template-columns: repeat(5, 1fr);
+                                column-gap: 20px;
+                                row-gap: 35px;
+                                grid-auto-rows: min-content;
+
+                                .hero-item {
+                                    height: 113px;
+                                    width: 95px;
+                                    border-radius: 20px;
+                                    overflow: hidden;
+                                    box-shadow: 7px 7px 30px rgba($color: #000000, $alpha: 0.6);
+                                    cursor: pointer;
+                                    position: relative;
                                     display: flex;
-                                    flex-direction: column;
                                     justify-content: center;
-                                    width: 170px;
-    
-                                    & > :nth-child(1) {
-                                        display: flex;
-                                        flex-direction: row;
-                                        align-items: center;
-    
-                                        img {
-                                            width: 50px;
-                                            height: 50px;
+                                    align-items: center;
+
+                                    @include hover-up(-6px, 300ms);
+
+                                    &:active {
+                                        transform: scale(1.05);
+                                    }
+
+                                    &:hover {
+                                        img.hero-item__avatar {
+                                            filter: blur(1px);
                                         }
 
-                                        span {
-                                            font-size: 28px;
-                                            padding-left: 15px;
+                                        .hero-item__name {
+                                            opacity: 1;
                                         }
                                     }
 
-                                    & > :nth-child(2) {
-                                        text-align: center;
-                                        margin-top: 10px;
-                                        font-size: 44px;
+                                    img.hero-item__avatar {
+                                        height: 100%;
+                                        width: 100%;
+                                        position: absolute;
+                                        z-index: 0;
+                                        transition: filter 200ms;
+                                    }
+
+                                    .hero-item__name {
+                                        position: absolute;
+                                        z-index: 1;
+                                        color: white;
+                                        font-size: 16px;
                                         font-weight: 800;
+                                        text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+                                        text-align: center;
+                                        transition: opacity 300ms;
+                                        opacity: 0;
+                                        padding: 0 5px;
                                     }
                                 }
+                            }
 
-                                .gold-balance .gold-balance__value {
-                                    color: gold;
-                                    -webkit-text-stroke: 1px black;
-                                    letter-spacing: 2px;
-                                }
-
-                                .rating-scores .rating-scores__value {
-                                    color: $pinky;
-                                    -webkit-text-stroke: 1px black;
-                                    letter-spacing: 2px;
+                            .hero-selection__info {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: center;
+                                align-items: center;
+    
+                                img {
+                                    height: 20px;
+                                    width: 20px;
                                 }
     
-                                &:nth-child(1) {
-                                    margin-left: $padding-left;
-                                }
-
-                                &:nth-child(2) {
-                                    padding-left: 40px;
+                                p {
+                                    font-size: 0.95em;
+                                    color: $dark-gray;
+                                    margin-left: 10px;
                                 }
                             }
                         }
-                    }
 
-                    .footer {
-                        padding-left: $padding-left;
+                        .hero-creation {
+                            display: none;
+
+                            .return-button {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: left;
+                                align-items: center;
+                                cursor: pointer;
+                                height: $top-line-height;
+                                padding: 0 20px;
+
+                                img {
+                                    height: 25px;
+                                    width: 25px;
+                                }
+
+                                &:hover {
+                                    background: #ebe2ff;
+                                }
+                            }
+
+                            .hero-creation__description {
+                                padding: 40px 50px;
+                                display: block;
+                                flex-direction: column;
+                                overflow-y: scroll;
+                                position: relative;
+
+                                &::-webkit-scrollbar {
+                                    width: 20px;
+                                }
+                                
+                                &::-webkit-scrollbar-track {
+                                    background-color: transparent;
+                                }
+                                
+                                &::-webkit-scrollbar-thumb {
+                                    background-color: $light;
+                                }
+                                
+                                &::-webkit-scrollbar-thumb:hover {
+                                    background-color: #d9c5ff;
+                                }
+
+                                .hero-brief {
+                                    display: flex;
+                                    flex-direction: row;
+                                    margin-bottom: 30px;
+
+                                    img.hero-brief__avatar {
+                                        height: 160px;
+                                        width: 130px;
+                                        z-index: 1;
+                                        border-radius: 20px;
+                                        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.35);
+
+                                        @include hover-scale(1.05, 300ms);
+                                    }
+
+                                    .hero-brief__nameclass {
+                                        display: flex;
+                                        flex-direction: column;
+                                        align-self: center;
+                                        padding-left: 50px;
+                                        font-size: 1.2em;
+
+                                        .name {
+                                            margin-bottom: 20px;
+                                        }
+
+                                        .name, .class {
+                                            & :nth-child(1) {
+                                                display: inline-block;
+                                                width: 130px;
+                                            }
+
+                                            & :nth-child(2) {
+                                                font-weight: 600;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .hero-creation__input {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                padding: 0 50px;
+
+                                .input-box {
+                                    width: 60%;
+                                    margin-right: 20px;
+
+                                    input {
+                                        background: transparent;
+    
+                                        &::placeholder {
+                                            color: $gray;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .hero-selection, .hero-creation {
+                            height: 100%;
+                            width: 100%;
+                            position: absolute;
+                        }
+                    }
+                }
+            }
+
+            .game-page {
+                $middle-section-width: 383px;
+
+                .middle-block {
+                    padding: 20px 40px;
+                    overflow-y: scroll;
+                    
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                .left-section {
+                    width: $left-section-width;
+                    z-index: 5;
+
+                    .game-sections__wrapper {
                         display: flex;
-                        flex-direction: row;
                         align-items: center;
+                        justify-content: center;
 
-                        .creation-date {
-                            width: 50%;
-                            
-                            .creation-date__title {
-                                color: rgba(0, 0, 0, 0.5);
-                                font-weight: 500;
+                        .game-sections {
+                            .game-sections__item {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                cursor: pointer;
+                                padding: 10px 55px;
+                                margin-bottom: 5px;
+                                border-radius: 20px;
+
+                                @include hover-up(-4px, 400ms);
+                                transition: all 400ms ease;
+                    
+                                &.selected {
+                                    background: #ebe2ff;
+                                }
+
+                                img {
+                                    width: 35px;
+                                    height: 35px;
+                                    margin-right: 10px;
+                                }
                             }
-
-                            .creation-date__value {
-                                margin-left: 30px;
-                                font-weight: 700;
-                                color: rgba(0, 0, 0, 0.5);
-                            }
-                        }
-
-                        .delete-character-button {
-                            margin-left: 40px;
                         }
                     }
                 }
 
-                .top-line, .bottom-line {
-                    background: $light;
-                    position: absolute;
-                    z-index: 1;
-                    width: 100%;
+                .middle-section {
+                    width: $middle-section-width;
+                    display: none;
+                    z-index: 4;
+
+                    .game-elements__wrapper {
+                        .game-elements {
+                            .game-elements__item {
+                                display: flex;
+                                align-items: center;
+                                padding: 10px 0 10px 15px;
+                                margin-bottom: 1px;
+                                cursor: pointer;
+                                border-radius: 20px;
+
+                                @include hover-up(-4px, 400ms);
+                                transition: all 400ms ease;
+
+                                &.selected {
+                                    background: #ebe2ff;
+                                }
+
+                                img {
+                                    width: 65px;
+                                    border-radius: 10px;
+                                    margin-right: 15px;
+                                    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+                                }
+                            }
+                        }
+                    }
                 }
 
-                .top-line {
-                    height: $top-line-height;
-                    top: 0;
+                .right-section {
+                    width: calc(100% - #{$middle-section-width} - #{$left-section-width});
+                    display: none;
+                    z-index: 3;
+
+                    .game-description__wrapper {
+                        .game-description {
+                            display: flex;
+                            flex-direction: column;
+
+                            .game-description__title {
+                                margin: 10px 0 20px 0;
+                                font-weight: 600;
+                                text-align: center;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .shop-page {
+                .left-section {
+                    width: $left-section-width;
+
+                    .item-categories__wrapper {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        overflow: hidden;
+
+                        .item-categories {
+                            .item-categories__item {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                padding: 10px 55px;
+                                margin-bottom: 5px;
+                                border-radius: 20px;
+                                cursor: pointer;
+
+                                @include hover-up(-4px, 400ms);
+                                transition: all 400ms ease;
+                    
+                                &.selected {
+                                    background: #ebe2ff;
+                                }
+
+                                img {
+                                    width: 35px;
+                                    height: 35px;
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
                 }
 
-                .bottom-line {
-                    height: $bottom-line-height;
-                    bottom: 0;
+                .right-section {
+                    width: calc(100% - #{$left-section-width});
+
+                    .items__wrapper {
+                        overflow: hidden;
+
+                        .items {
+                            display: flex;
+                            flex-direction: column;
+
+                            .items__title {
+                                font-weight: 600;
+                                text-align: center;
+                                margin-top: 30px;
+                            }
+
+                            .items__grid {
+                                padding: 40px 50px;
+                                display: grid;
+                                grid-template-columns: repeat(5, 1fr);
+                                column-gap: 20px;
+                                row-gap: 35px;
+                                grid-auto-rows: min-content;
+
+                                .item {
+                                    height: 65px;
+                                    width: 95px;
+                                    border-radius: 15px;
+                                    overflow: hidden;
+                                    box-shadow: 7px 7px 30px rgba($color: #000000, $alpha: 0.6);
+                                    cursor: pointer;
+                                    position: relative;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+
+                                    @include hover-up(-6px, 300ms);
+
+                                    &:active {
+                                        transform: scale(1.075);
+                                    }
+
+                                    &:hover {
+                                        img.item__icon {
+                                            filter: blur(1px);
+                                        }
+
+                                        .item__name {
+                                            opacity: 1;
+                                        }
+                                    }
+
+                                    img.item__icon {
+                                        height: 100%;
+                                        width: 100%;
+                                        position: absolute;
+                                        z-index: 0;
+                                        transition: filter 200ms;
+                                    }
+
+                                    .item__name {
+                                        position: absolute;
+                                        z-index: 1;
+                                        color: white;
+                                        font-size: 15px;
+                                        font-weight: 800;
+                                        text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+                                        text-align: center;
+                                        transition: opacity 300ms;
+                                        opacity: 0;
+                                        padding: 0 5px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            .game-page, .shop-page {
+                .footer, .footer .guide-step {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: $dark-gray;
+
+                    h1.guide-step__number {
+                        margin-right: 10px;
+                    }
+                }
+
+                .info {
+                    width: calc(100% - #{$left-section-width});
+                    @include centered();
+                    left: 65%;
                 }
             }
         }

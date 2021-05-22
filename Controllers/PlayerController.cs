@@ -9,5 +9,17 @@ namespace GameManager.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Game()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Shop()
+        {
+            return View();
+        }
     }
 }

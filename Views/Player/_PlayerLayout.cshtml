@@ -5,13 +5,13 @@
 <div class="player-form">
     <div class="navbar">
         <div class="navbar__first-group">
-            <a class="navbar__item selected" asp-action="" asp-controller="">
+            <a class="navbar__item selected" asp-action="MyCharacters" asp-controller="Player">
                 <span>Мои персонажи</span>
             </a>
-            <a class="navbar__item" asp-action="" asp-controller="">
+            <a class="navbar__item" asp-action="Game" asp-controller="Player">
                 <span>Игра</span>
             </a>
-            <a class="navbar__item" asp-action="" asp-controller="">
+            <a class="navbar__item" asp-action="Shop" asp-controller="Player">
                 <span>Магазин</span>
             </a>
         </div>
@@ -29,3 +29,5 @@
         @RenderBody()
     </div>
 </div>
+
+<script src="~/js/navbarManager.js"></script>

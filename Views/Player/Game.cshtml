@@ -1,0 +1,131 @@
+@{
+    ViewData["Title"] = "Game";
+    Layout = "_PlayerLayout";
+}
+
+<div class="game-page">
+    <section class="left-section">
+        <span class="title">Доступные разделы</span>
+        <div class="middle-block game-sections__wrapper">
+            <div class="game-sections">
+                <div class="game-sections__item">
+                    <img src="~/pictures/section_icons/creature.svg" alt="">
+                    <span>Существа</span>
+                </div>
+                <div class="game-sections__item">
+                    <img src="~/pictures/section_icons/location.svg" alt="">
+                    <span>Локации</span>
+                </div>
+                <div class="game-sections__item">
+                    <img src="~/pictures/section_icons/armory.svg" alt="">
+                    <span>Предметы</span>
+                </div>
+                <div class="game-sections__item">
+                    <img src="~/pictures/section_icons/hero.svg" alt="">
+                    <span>Герои</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="guide-step">
+                <h1 class="guide-step__number">1</h1>
+                <span class="guide-step__text">Выберите раздел</span>
+            </div>
+        </div>
+    </section>
+    <section class="middle-section">
+        <span class="title">Герои</span>
+        <div class="middle-block game-elements__wrapper">
+            <div class="game-elements">
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/antimage.png" alt="">
+                    <span>Anti Mage</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/arcwarden.png" alt="">
+                    <span>Arc Warden</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/dazzle.png" alt="">
+                    <span>Dazzle</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/mortred.png" alt="">
+                    <span>Phantom Assassin</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/od.png" alt="">
+                    <span>Outworld Devourer</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/kunkka.png" alt="">
+                    <span>Kunkka</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/lina.png" alt="">
+                    <span>Lina</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/pudge.png" alt="">
+                    <span>Pudge</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/tidehunter.png" alt="">
+                    <span>Tidehunter</span>
+                </div>
+                <div class="game-elements__item">
+                    <img src="~/pictures/hero_icons/venge.png" alt="">
+                    <span>Vengeful Spirit</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="guide-step">
+                <h1 class="guide-step__number">2</h1>
+                <span class="guide-step__text">Выберите элемент</span>
+            </div>
+        </div>
+    </section>
+    <section class="right-section">
+        <span class="title">Описание</span>
+        <div class="middle-block game-description__wrapper">
+            <div class="game-description">
+                <span class="game-description__title">Phantom Assassin</span>
+                <div class="game-description__text">
+                    <p>Сёстры Вуали, считающие убийство священной частью естественного цикла
+                        жизни, находят новых воспитанников в гаданиях. О своих жертвах сёстры узнают в медитации и
+                        пророческих изречениях. Они не принимают контрактов, и, похоже, не преследуют жертв из-за
+                        политики или корысти. Их убийства не выглядят частью какого-то замысла, и могут показаться
+                        не связанными между собой: сегодня жертвой станет человек с великой властью, завтра —
+                        крестьянин или копатель колодцев. Какой бы между убийствами ни было связи, её знают лишь
+                        сёстры. Они считают убитых жертвенным даром, а смерть от рук ордена — большой честью. Не
+                        ведающие своей личности, взращённые лишь на устоях ордена, убийцы легко заменяют друг друга,
+                        и число их неведомо. Возможно, их много; возможно, их единицы. Что лежит под вуалью — тайна
+                        без ответа. И лишь изредка эта сестра, когда никто не слышит, поднимает свою вуаль, чтобы
+                        нарушить запрет, прошептав своё имя: Мортред.</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="guide-step">
+                <h1 class="guide-step__number">3</h1>
+                <span class="guide-step__text">Прочитайте описание</span>
+            </div>
+        </div>
+    </section>
+    <div class="info">
+        <span class="title"></span>
+        <div class="middle-block">
+            <img src="~/icons/svg/info.svg" alt="" class="info__icon">
+            <p class="info__text">Выберите игровой раздел из списка слева.</p>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+
+    @* Decorative blocks on top and bottom *@
+    <div class="top-line"></div>
+    <div class="bottom-line"></div>
+</div>
+
+<script src="~/js/gameTransitions.js"></script>

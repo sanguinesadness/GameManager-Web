@@ -123,6 +123,48 @@
   }
 }
 
+@-webkit-keyframes expand-right {
+  0% {
+    width: 0;
+    left: 0;
+  }
+  100% {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@keyframes expand-right {
+  0% {
+    width: 0;
+    left: 0;
+  }
+  100% {
+    width: 100%;
+    left: 0;
+  }
+}
+
+@-webkit-keyframes hide-left {
+  0% {
+    width: 100%;
+    border-radius: 10px;
+  }
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes hide-left {
+  0% {
+    width: 100%;
+    border-radius: 10px;
+  }
+  100% {
+    width: 0;
+  }
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   font-size: 19px;
@@ -217,6 +259,14 @@ input[type="date"].input-validation-error::placeholder {
   color: #f4364f;
   opacity: 0.8;
   font-weight: 500;
+}
+
+input[type="text"].without-hover-up,
+input[type="password"].without-hover-up,
+input[type="email"].without-hover-up,
+input[type="date"].without-hover-up {
+  -webkit-transform: unset;
+          transform: unset;
 }
 
 input[type="date"] {
@@ -337,7 +387,7 @@ button.flat:hover, button.flat:focus, .button.flat:hover, .button.flat:focus {
 }
 
 button.flat:hover, .button.flat:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #ebe2ff;
 }
 
 button.without-hover-up, .button.without-hover-up {
@@ -609,6 +659,47 @@ button.without-hover-up:active, .button.without-hover-up:active {
           box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
 }
 
+.content .info .middle-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  padding: 0 150px 50px 150px;
+}
+
+.content .info .middle-block .info__icon {
+  height: 60px;
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.content .info .middle-block .info__text {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.content .info .footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+}
+
 .content .login-form {
   height: 530px;
   width: 900px;
@@ -850,7 +941,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
       -ms-flex-pack: center;
           justify-content: center;
   text-align: center;
-  text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.25);
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
   -webkit-transition: 500ms all;
   transition: 500ms all;
   -webkit-transition: 200ms background;
@@ -870,32 +961,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
   height: calc(100% - 75px);
 }
 
-.content .player-form .player_form__content .my-characters-page {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  height: 100%;
-  width: 100%;
-  position: relative;
-}
-
-.content .player-form .player_form__content .my-characters-page .left-section, .content .player-form .player_form__content .my-characters-page .right-section {
-  height: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  z-index: 2;
-}
-
-.content .player-form .player_form__content .my-characters-page .left-section .title, .content .player-form .player_form__content .my-characters-page .right-section .title {
+.content .player-form .player_form__content > * .title {
   height: 9%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -910,17 +976,60 @@ button.without-hover-up:active, .button.without-hover-up:active {
   font-size: 0.95em;
 }
 
-.content .player-form .player_form__content .my-characters-page .left-section .middle-block, .content .player-form .player_form__content .my-characters-page .right-section .middle-block {
+.content .player-form .player_form__content > * .middle-block {
   height: calc(100% - 9% - 13%);
 }
 
-.content .player-form .player_form__content .my-characters-page .left-section .footer, .content .player-form .player_form__content .my-characters-page .right-section .footer {
+.content .player-form .player_form__content > * .footer {
   height: 13%;
   width: 100%;
 }
 
+.content .player-form .player_form__content > * .top-line, .content .player-form .player_form__content > * .bottom-line {
+  background: #E4D6FF;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}
+
+.content .player-form .player_form__content > * .top-line {
+  height: 9%;
+  top: 0;
+}
+
+.content .player-form .player_form__content > * .bottom-line {
+  height: 13%;
+  bottom: 0;
+}
+
+.content .player-form .player_form__content > * .left-section, .content .player-form .player_form__content > * .right-section, .content .player-form .player_form__content > * .middle-section {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  z-index: 2;
+}
+
+.content .player-form .player_form__content .my-characters-page, .content .player-form .player_form__content .game-page, .content .player-form .player_form__content .shop-page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
 .content .player-form .player_form__content .my-characters-page .left-section {
   width: 350px;
+  z-index: 3;
 }
 
 .content .player-form .player_form__content .my-characters-page .left-section .characters-list {
@@ -939,6 +1048,10 @@ button.without-hover-up:active, .button.without-hover-up:active {
           align-items: center;
   padding: 20px 0;
   position: relative;
+}
+
+.content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item:nth-child(1) {
+  padding-top: 10px;
 }
 
 .content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item .character {
@@ -973,13 +1086,16 @@ button.without-hover-up:active, .button.without-hover-up:active {
   height: 42px;
   border-radius: 12px;
   margin-left: 12px;
+  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item .character .character__name {
   color: white;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.1em;
   width: 190px;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item .character:active {
@@ -987,14 +1103,22 @@ button.without-hover-up:active, .button.without-hover-up:active {
           transform: scale(1.075);
 }
 
-.content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item.selected::after {
+.content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item::after {
   position: absolute;
   background: #C7A8FF;
   height: 36px;
-  width: 100%;
+  width: 0;
   content: "";
   z-index: -1;
   border-radius: 0 10px 10px 0;
+  -webkit-animation: hide-left 500ms;
+          animation: hide-left 500ms;
+}
+
+.content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item.selected::after {
+  -webkit-animation: expand-right 500ms ease;
+          animation: expand-right 500ms ease;
+  width: 100%;
 }
 
 .content .player-form .player_form__content .my-characters-page .left-section button.create-character-button {
@@ -1004,9 +1128,26 @@ button.without-hover-up:active, .button.without-hover-up:active {
 
 .content .player-form .player_form__content .my-characters-page .right-section {
   width: calc(100% - 350px);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info {
+.content .player-form .player_form__content .my-characters-page .right-section .footer button {
+  padding: 14px 30px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .info, .content .player-form .player_form__content .my-characters-page .right-section .characters, .content .player-form .player_form__content .my-characters-page .right-section .heroes {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .characters {
+  display: none;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info {
   font-size: 21px;
   padding: 40px 0;
   display: -webkit-box;
@@ -1021,31 +1162,31 @@ button.without-hover-up:active, .button.without-hover-up:active {
           justify-content: space-between;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info table.character-info__table {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info table.character-info__table {
   width: 100%;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info table.character-info__table tr {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info table.character-info__table tr {
   width: 100%;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info table.character-info__table tr td {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info table.character-info__table tr td {
   padding: 10px 0;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info table.character-info__table tr td:nth-child(1) {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info table.character-info__table tr td:nth-child(1) {
   padding-left: 75px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info table.character-info__table tr td:nth-child(2) {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info table.character-info__table tr td:nth-child(2) {
   font-weight: 700;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info table.character-info__table tr td.row-status__value {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info table.character-info__table tr td.row-status__value {
   color: #1ed068;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1059,11 +1200,11 @@ button.without-hover-up:active, .button.without-hover-up:active {
   margin-bottom: 15px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div {
   width: 50%;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .gold-balance, .content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .rating-scores {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .gold-balance, .content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .rating-scores {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1077,7 +1218,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
   width: 170px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .gold-balance > :nth-child(1), .content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .rating-scores > :nth-child(1) {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .gold-balance > :nth-child(1), .content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .rating-scores > :nth-child(1) {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1090,44 +1231,44 @@ button.without-hover-up:active, .button.without-hover-up:active {
           align-items: center;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .gold-balance > :nth-child(1) img, .content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .rating-scores > :nth-child(1) img {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .gold-balance > :nth-child(1) img, .content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .rating-scores > :nth-child(1) img {
   width: 50px;
   height: 50px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .gold-balance > :nth-child(1) span, .content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .rating-scores > :nth-child(1) span {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .gold-balance > :nth-child(1) span, .content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .rating-scores > :nth-child(1) span {
   font-size: 28px;
   padding-left: 15px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .gold-balance > :nth-child(2), .content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .rating-scores > :nth-child(2) {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .gold-balance > :nth-child(2), .content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .rating-scores > :nth-child(2) {
   text-align: center;
   margin-top: 10px;
   font-size: 44px;
   font-weight: 800;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .gold-balance .gold-balance__value {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .gold-balance .gold-balance__value {
   color: gold;
   -webkit-text-stroke: 1px black;
   letter-spacing: 2px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div .rating-scores .rating-scores__value {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div .rating-scores .rating-scores__value {
   color: #F80086;
   -webkit-text-stroke: 1px black;
   letter-spacing: 2px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div:nth-child(1) {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div:nth-child(1) {
   margin-left: 75px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .character-info .character-info__main > div:nth-child(2) {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .character-info .character-info__main > div:nth-child(2) {
   padding-left: 40px;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .footer {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .footer {
   padding-left: 75px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1141,40 +1282,613 @@ button.without-hover-up:active, .button.without-hover-up:active {
           align-items: center;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .footer .creation-date {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .footer .creation-date {
   width: 50%;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .footer .creation-date .creation-date__title {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .footer .creation-date .creation-date__title {
   color: rgba(0, 0, 0, 0.5);
   font-weight: 500;
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .footer .creation-date .creation-date__value {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .footer .creation-date .creation-date__value {
   margin-left: 30px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.5);
 }
 
-.content .player-form .player_form__content .my-characters-page .right-section .footer .delete-character-button {
+.content .player-form .player_form__content .my-characters-page .right-section .characters .footer .delete-character-button {
   margin-left: 40px;
 }
 
-.content .player-form .player_form__content .my-characters-page .top-line, .content .player-form .player_form__content .my-characters-page .bottom-line {
-  background: #E4D6FF;
+.content .player-form .player_form__content .my-characters-page .right-section .heroes {
+  display: none;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid {
+  padding: 40px 50px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[5];
+      grid-template-columns: repeat(5, 1fr);
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
+  row-gap: 35px;
+  grid-auto-rows: -webkit-min-content;
+  grid-auto-rows: min-content;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item {
+  height: 113px;
+  width: 95px;
+  border-radius: 20px;
+  overflow: hidden;
+  -webkit-box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.6);
+          box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 300ms -webkit-transform;
+  transition: 300ms -webkit-transform;
+  transition: 300ms transform;
+  transition: 300ms transform, 300ms -webkit-transform;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item:hover, .content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item:focus {
+  -webkit-transform: translateY(-6px);
+          transform: translateY(-6px);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item:active {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item:hover img.hero-item__avatar {
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item:hover .hero-item__name {
+  opacity: 1;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item img.hero-item__avatar {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  -webkit-transition: -webkit-filter 200ms;
+  transition: -webkit-filter 200ms;
+  transition: filter 200ms;
+  transition: filter 200ms, -webkit-filter 200ms;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__grid .hero-item .hero-item__name {
   position: absolute;
   z-index: 1;
-  width: 100%;
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  -webkit-transition: opacity 300ms;
+  transition: opacity 300ms;
+  opacity: 0;
+  padding: 0 5px;
 }
 
-.content .player-form .player_form__content .my-characters-page .top-line {
-  height: 9%;
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__info img {
+  height: 20px;
+  width: 20px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection .hero-selection__info p {
+  font-size: 0.95em;
+  color: rgba(0, 0, 0, 0.7);
+  margin-left: 10px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation {
+  display: none;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .return-button {
+  position: absolute;
   top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  height: 9%;
+  padding: 0 20px;
 }
 
-.content .player-form .player_form__content .my-characters-page .bottom-line {
-  height: 13%;
-  bottom: 0;
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .return-button img {
+  height: 25px;
+  width: 25px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .return-button:hover {
+  background: #ebe2ff;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description {
+  padding: 40px 50px;
+  display: block;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description::-webkit-scrollbar {
+  width: 20px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description::-webkit-scrollbar-thumb {
+  background-color: #E4D6FF;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description::-webkit-scrollbar-thumb:hover {
+  background-color: #d9c5ff;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-bottom: 30px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief img.hero-brief__avatar {
+  height: 160px;
+  width: 130px;
+  z-index: 1;
+  border-radius: 20px;
+  -webkit-box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.35);
+          box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.35);
+  -webkit-transition: 300ms -webkit-transform;
+  transition: 300ms -webkit-transform;
+  transition: 300ms transform;
+  transition: 300ms transform, 300ms -webkit-transform;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief img.hero-brief__avatar:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief .hero-brief__nameclass {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-item-align: center;
+      align-self: center;
+  padding-left: 50px;
+  font-size: 1.2em;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief .hero-brief__nameclass .name {
+  margin-bottom: 20px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief .hero-brief__nameclass .name :nth-child(1), .content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief .hero-brief__nameclass .class :nth-child(1) {
+  display: inline-block;
+  width: 130px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief .hero-brief__nameclass .name :nth-child(2), .content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__description .hero-brief .hero-brief__nameclass .class :nth-child(2) {
+  font-weight: 600;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 50px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__input .input-box {
+  width: 60%;
+  margin-right: 20px;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__input .input-box input {
+  background: transparent;
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__input .input-box input::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__input .input-box input:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__input .input-box input::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation .hero-creation__input .input-box input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-selection, .content .player-form .player_form__content .my-characters-page .right-section .heroes .hero-creation {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.content .player-form .player_form__content .game-page .middle-block {
+  padding: 20px 40px;
+  overflow-y: scroll;
+}
+
+.content .player-form .player_form__content .game-page .middle-block::-webkit-scrollbar {
+  display: none;
+}
+
+.content .player-form .player_form__content .game-page .left-section {
+  width: 350px;
+  z-index: 5;
+}
+
+.content .player-form .player_form__content .game-page .left-section .game-sections__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.content .player-form .player_form__content .game-page .left-section .game-sections__wrapper .game-sections .game-sections__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding: 10px 55px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  -webkit-transition: 400ms -webkit-transform;
+  transition: 400ms -webkit-transform;
+  transition: 400ms transform;
+  transition: 400ms transform, 400ms -webkit-transform;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.content .player-form .player_form__content .game-page .left-section .game-sections__wrapper .game-sections .game-sections__item:hover, .content .player-form .player_form__content .game-page .left-section .game-sections__wrapper .game-sections .game-sections__item:focus {
+  -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+}
+
+.content .player-form .player_form__content .game-page .left-section .game-sections__wrapper .game-sections .game-sections__item.selected {
+  background: #ebe2ff;
+}
+
+.content .player-form .player_form__content .game-page .left-section .game-sections__wrapper .game-sections .game-sections__item img {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+.content .player-form .player_form__content .game-page .middle-section {
+  width: 383px;
+  display: none;
+  z-index: 4;
+}
+
+.content .player-form .player_form__content .game-page .middle-section .game-elements__wrapper .game-elements .game-elements__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 0 10px 15px;
+  margin-bottom: 1px;
+  cursor: pointer;
+  border-radius: 20px;
+  -webkit-transition: 400ms -webkit-transform;
+  transition: 400ms -webkit-transform;
+  transition: 400ms transform;
+  transition: 400ms transform, 400ms -webkit-transform;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.content .player-form .player_form__content .game-page .middle-section .game-elements__wrapper .game-elements .game-elements__item:hover, .content .player-form .player_form__content .game-page .middle-section .game-elements__wrapper .game-elements .game-elements__item:focus {
+  -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+}
+
+.content .player-form .player_form__content .game-page .middle-section .game-elements__wrapper .game-elements .game-elements__item.selected {
+  background: #ebe2ff;
+}
+
+.content .player-form .player_form__content .game-page .middle-section .game-elements__wrapper .game-elements .game-elements__item img {
+  width: 65px;
+  border-radius: 10px;
+  margin-right: 15px;
+  -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+          box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
+}
+
+.content .player-form .player_form__content .game-page .right-section {
+  width: calc(100% - 383px - 350px);
+  display: none;
+  z-index: 3;
+}
+
+.content .player-form .player_form__content .game-page .right-section .game-description__wrapper .game-description {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.content .player-form .player_form__content .game-page .right-section .game-description__wrapper .game-description .game-description__title {
+  margin: 10px 0 20px 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.content .player-form .player_form__content .shop-page .left-section {
+  width: 350px;
+}
+
+.content .player-form .player_form__content .shop-page .left-section .item-categories__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.content .player-form .player_form__content .shop-page .left-section .item-categories__wrapper .item-categories .item-categories__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 55px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  cursor: pointer;
+  -webkit-transition: 400ms -webkit-transform;
+  transition: 400ms -webkit-transform;
+  transition: 400ms transform;
+  transition: 400ms transform, 400ms -webkit-transform;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.content .player-form .player_form__content .shop-page .left-section .item-categories__wrapper .item-categories .item-categories__item:hover, .content .player-form .player_form__content .shop-page .left-section .item-categories__wrapper .item-categories .item-categories__item:focus {
+  -webkit-transform: translateY(-4px);
+          transform: translateY(-4px);
+}
+
+.content .player-form .player_form__content .shop-page .left-section .item-categories__wrapper .item-categories .item-categories__item.selected {
+  background: #ebe2ff;
+}
+
+.content .player-form .player_form__content .shop-page .left-section .item-categories__wrapper .item-categories .item-categories__item img {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+.content .player-form .player_form__content .shop-page .right-section {
+  width: calc(100% - 350px);
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper {
+  overflow: hidden;
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__title {
+  font-weight: 600;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid {
+  padding: 40px 50px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[5];
+      grid-template-columns: repeat(5, 1fr);
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
+  row-gap: 35px;
+  grid-auto-rows: -webkit-min-content;
+  grid-auto-rows: min-content;
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item {
+  height: 65px;
+  width: 95px;
+  border-radius: 15px;
+  overflow: hidden;
+  -webkit-box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.6);
+          box-shadow: 7px 7px 30px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 300ms -webkit-transform;
+  transition: 300ms -webkit-transform;
+  transition: 300ms transform;
+  transition: 300ms transform, 300ms -webkit-transform;
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item:hover, .content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item:focus {
+  -webkit-transform: translateY(-6px);
+          transform: translateY(-6px);
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item:active {
+  -webkit-transform: scale(1.075);
+          transform: scale(1.075);
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item:hover img.item__icon {
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item:hover .item__name {
+  opacity: 1;
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item img.item__icon {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 0;
+  -webkit-transition: -webkit-filter 200ms;
+  transition: -webkit-filter 200ms;
+  transition: filter 200ms;
+  transition: filter 200ms, -webkit-filter 200ms;
+}
+
+.content .player-form .player_form__content .shop-page .right-section .items__wrapper .items .items__grid .item .item__name {
+  position: absolute;
+  z-index: 1;
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  -webkit-transition: opacity 300ms;
+  transition: opacity 300ms;
+  opacity: 0;
+  padding: 0 5px;
+}
+
+.content .player-form .player_form__content .game-page .footer, .content .player-form .player_form__content .game-page .footer .guide-step, .content .player-form .player_form__content .shop-page .footer, .content .player-form .player_form__content .shop-page .footer .guide-step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.content .player-form .player_form__content .game-page .footer h1.guide-step__number, .content .player-form .player_form__content .game-page .footer .guide-step h1.guide-step__number, .content .player-form .player_form__content .shop-page .footer h1.guide-step__number, .content .player-form .player_form__content .shop-page .footer .guide-step h1.guide-step__number {
+  margin-right: 10px;
+}
+
+.content .player-form .player_form__content .game-page .info, .content .player-form .player_form__content .shop-page .info {
+  width: calc(100% - 350px);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  left: 65%;
 }
 
 .checkbox {

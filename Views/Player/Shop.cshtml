@@ -1,0 +1,135 @@
+@{
+    ViewData["Title"] = "Game";
+    Layout = "_PlayerLayout";
+}
+
+<div class="shop-page">
+    <section class="left-section">
+        <span class="title">Доступные категории</span>
+        <div class="middle-block item-categories__wrapper">
+            <div class="item-categories">
+                <div class="item-categories__item">
+                    <img src="~/pictures/category_icons/armor.svg" alt="">
+                    <span>Броня</span>
+                </div>
+                <div class="item-categories__item selected">
+                    <img src="~/pictures/category_icons/weapon.svg" alt="">
+                    <span>Оружие</span>
+                </div>
+                <div class="item-categories__item">
+                    <img src="~/pictures/category_icons/magic.svg" alt="">
+                    <span>Магия</span>
+                </div>
+                <div class="item-categories__item">
+                    <img src="~/pictures/category_icons/artefact.svg" alt="">
+                    <span>Артефакты</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="guide-step">
+                <h1 class="guide-step__number">1</h1>
+                <span class="guide-step__text">Выберите категорию</span>
+            </div>
+        </div>
+    </section>
+    <section class="right-section">
+        <div class="title">Список предметов</div>
+        <div class="middle-block items__wrapper">
+            <div class="items">
+                <span class="items__title">Оружие</span>
+                <div class="items__grid">
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/abyssal.png" alt="">
+                        <span class="item__name">Abyssal Blade</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/armlet.png" alt="">
+                        <span class="item__name">Armlet of Mordiggan</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/basher.png" alt="">
+                        <span class="item__name">Basher</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/battlefury.png" alt="">
+                        <span class="item__name">Battlefury</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/bloodthorn.png" alt="">
+                        <span class="item__name">Bloodthorn</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/butterfly.png" alt="">
+                        <span class="item__name">Butterfly</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/crystalys.png" alt="">
+                        <span class="item__name">Crystalys</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/deadalus.png" alt="">
+                        <span class="item__name">Deadalus</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/desolator.png" alt="">
+                        <span class="item__name">Desolator</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/etheralblade.png" alt="">
+                        <span class="item__name">Etheral Blade</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/meteor.png" alt="">
+                        <span class="item__name">Meteor Hammer</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/mkb.png" alt="">
+                        <span class="item__name">Monkey King Bar</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/rapier.png" alt="">
+                        <span class="item__name">Divine Rapier</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/shadowblade.png" alt="">
+                        <span class="item__name">Shadow Blade</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
+                        <span class="item__name">Silver Edge</span>
+                    </div>
+
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
+                        <span class="item__name">Silver Edge</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
+                        <span class="item__name">Silver Edge</span>
+                    </div>
+                    <div class="item">
+                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
+                        <span class="item__name">Silver Edge</span>
+                    </div>
+                </div>
+            </div>
+            <div class="gold-balance">
+                <img class="gold-balance__icon" src="~/icons/svg/coins2.svg" alt="">
+                <span class="gold-balance__value">2507</span>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="guide-step">
+                <h1 class="guide-step__number">2</h1>
+                <span class="guide-step__text">Выберите предмет</span>
+            </div>
+        </div>
+    </section>
+
+    @* Decorative blocks on top and bottom *@
+    <div class="top-line"></div>
+    <div class="bottom-line"></div>
+</div>
+
+<script src="~/js/shopTransitions.js"></script>
