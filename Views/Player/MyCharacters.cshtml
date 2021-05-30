@@ -3,216 +3,198 @@
     Layout = "_PlayerLayout";
 }
 
-@{
-    if (!User.Identity.IsAuthenticated)
-    {
-        <h1>No account</h1>
-    }
-    else
-    {
-        <div class="my-characters-page">
-            <section class="left-section">
-                <span class="title">Список персонажей</span>
-                <div class="characters-list middle-block">
-                    <div class="character-item">
-                        <a class="character">
-                            <img class="character__icon" src="~/pictures/hero_icons/lina.png" alt="">
-                            <h4 class="character__name">player123</h4>
-                        </a>
-                    </div>
-                    <div class="character-item">
-                        <a class="character">
-                            <img class="character__icon" src="~/pictures/hero_icons/antimage.png" alt="">
-                            <h4 class="character__name">mageSlayer</h4>
-                        </a>
-                    </div>
+<div class="my-characters-page">
+    <section class="left-section">
+        <span class="title">Список персонажей</span>
+        <div class="characters-list middle-block">
+            <div class="empty-characters-block">
+                <span class="empty-characters-block__text">Список пуст 😥</span>
+            </div>
+            @foreach (Character character in ViewBag.Characters)
+            {
+                <div class="character-item">
+                    <a class="character">
+                        <span hidden class="character__id">@character.Id</span>
+                        <img class="character__icon" src="~/pictures/hero_icons/@character.Hero.Icon" alt="" />
+                        <h4 class="character__name">@character.Name</h4>
+                    </a>
                 </div>
-                <div class="footer">
-                    <button class="create-character-button flat">Создать персонажа</button>
-                </div>
-            </section>
-
-            <section class="right-section">
-                <div class="info selected">
-                    <span class="title"></span>
-                    <div class="middle-block">
-                        <img src="~/icons/svg/info.svg" alt="" class="info__icon">
-                        <p class="info__text">Выберите персонажа в списке слева, чтобы просмотреть подробную информацию о нем.</p>
-                    </div>
-                    <div class="footer">
-                    </div>
-                </div>
-                <div class="characters">
-                    <span class="title">Информация о персонаже</span>
-                    <div class="character-info middle-block">
-                        <table class="character-info__table">
-                            <tr class="row-status">
-                                <td class="row-status__title">Статус:</td>
-                                <td class="row-status__value">Активен</td>
-                            </tr>
-                            <tr class="row-location">
-                                <td class="row-location__title">Локация:</td>
-                                <td class="row-location__value">Тельдрассил</td>
-                            </tr>
-                            <tr class="row-level">
-                                <td class="row-level__title">Уровень:</td>
-                                <td class="row-level__value">24</td>
-                            </tr>
-                            <tr class="row-class">
-                                <td class="row-class__title">Класс:</td>
-                                <td class="row-class__value">Интеллект</td>
-                            </tr>
-                            <tr class="row-hours">
-                                <td class="row-hours__title">Часов в игре:</td>
-                                <td class="row-hours__value">108</td>
-                            </tr>
-                        </table>
-                        <div class="character-info__main">
-                            <div>
-                                <div class="gold-balance">
-                                    <span class="gold-balance__title">
-                                        <img src="~/icons/svg/coins.svg" alt="">
-                                        <span>Золото</span>
-                                    </span>
-                                    <h1 class="gold-balance__value">2507</h1>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="rating-scores">
-                                    <span class="rating-scores__title">
-                                        <img src="~/icons/svg/rating.svg" alt="">
-                                        <span>Рейтинг</span>
-                                    </span>
-                                    <h1 class="rating-scores__value">180133</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="footer">
-                        <div class="creation-date">
-                            <span class="creation-date__title">Дата создания:</span>
-                            <span class="creation-date__value">24.04.2018</span>
-                        </div>
-                        <button class="delete-character-button accent without-hover-up">Удалить персонажа</button>
-                    </div>
-                </div>
-                <div class="heroes">
-                    <div class="hero-selection">
-                        <span class="title">Создание нового персонажа</span>
-                        <div class="hero-selection__grid middle-block">
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/od.jpg" alt="">
-                                <span class="hero-item__name">Outworld Devourer</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/antimage.jpg" alt="">
-                                <span class="hero-item__name">Antimage</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/arcwarden.jpg" alt="">
-                                <span class="hero-item__name">Arc Warden</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/dazzle.jpg" alt="">
-                                <span class="hero-item__name">Dazzle</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/kunkka.jpg" alt="">
-                                <span class="hero-item__name">Kunkka</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/lina.jpg" alt="">
-                                <span class="hero-item__name">Lina</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/mortred.jpg" alt="">
-                                <span class="hero-item__name">Phantom Assassin</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/pudge.jpg" alt="">
-                                <span class="hero-item__name">Pudge</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/tidehunter.jpg" alt="">
-                                <span class="hero-item__name">Tidehunter</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/venge.jpg" alt="">
-                                <span class="hero-item__name">Vengeful Spirit</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/venge.jpg" alt="">
-                                <span class="hero-item__name">Vengeful Spirit</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/venge.jpg" alt="">
-                                <span class="hero-item__name">Vengeful Spirit</span>
-                            </span>
-                            <span class="hero-item">
-                                <img class="hero-item__avatar" src="~/pictures/hero_avatars/venge.jpg" alt="">
-                                <span class="hero-item__name">Vengeful Spirit</span>
-                            </span>
-                        </div>
-                        <div class="hero-selection__info footer">
-                            <img src="~/icons/svg/info.svg" alt="">
-                            <p>Выберите доступного героя из списка, нажав на его иконку.</p>
-                        </div>
-                    </div>
-                    <div class="hero-creation">
-                        <span class="return-button">
-                            <img src="~/icons/svg/left-arrow.svg" alt="">
-                        </span>
-                        <span class="title">Создание нового персонажа</span>
-                        <div class="hero-creation__description middle-block">
-                            <div class="hero-brief">
-                                <img class="hero-brief__avatar" src="~/pictures/hero_avatars/mortred.jpg" alt="">
-                                <div class="hero-brief__nameclass">
-                                    <span class="name">
-                                        <span class="name__title">Имя:</span>
-                                        <span class="name__value">Phantom Assassin</span>
-                                    </span>
-                                    <span class="class">
-                                        <span class="class__title">Класс:</span>
-                                        <span class="class__value">Интеллект</span>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="hero-lore">
-                                <p class="hero-lore__text">Сёстры Вуали, считающие убийство священной частью естественного цикла
-                                    жизни, находят новых воспитанников в гаданиях. О своих жертвах сёстры узнают в медитации и
-                                    пророческих изречениях. Они не принимают контрактов, и, похоже, не преследуют жертв из-за
-                                    политики или корысти. Их убийства не выглядят частью какого-то замысла, и могут показаться
-                                    не связанными между собой: сегодня жертвой станет человек с великой властью, завтра —
-                                    крестьянин или копатель колодцев. Какой бы между убийствами ни было связи, её знают лишь
-                                    сёстры. Они считают убитых жертвенным даром, а смерть от рук ордена — большой честью. Не
-                                    ведающие своей личности, взращённые лишь на устоях ордена, убийцы легко заменяют друг друга,
-                                    и число их неведомо. Возможно, их много; возможно, их единицы. Что лежит под вуалью — тайна
-                                    без ответа. И лишь изредка эта сестра, когда никто не слышит, поднимает свою вуаль, чтобы
-                                    нарушить запрет, прошептав своё имя: Мортред.</p>
-                            </div>
-                        </div>
-                        <div class="hero-creation__input footer">
-                            <div class="input-box">
-                                <input class="wrong-input without-hover-up" type="text" placeholder="Имя персонажа"> @* !todo add asp-for="CharacterName" *@
-                                <span class="icon"></span>
-                                <span class="error-label">
-                                    <span class="icon"></span>
-                                    <span class="text"></span> @* TODO add asp-validation-for="CharacterName" *@
-                                </span>
-                            </div>
-                            <button class="accent without-hover-up">Создать персонажа</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            @* Decorative blocks on top and bottom *@
-            <div class="top-line"></div>
-            <div class="bottom-line"></div>
+            }
         </div>
+        <div class="footer">
+            <button class="create-character-button flat">Создать персонажа</button>
+        </div>
+    </section>
 
-        <script src="~/js/heroSelection.js"></script>
-        <script src="~/js/characterSelection.js"></script>
-        <script src="~/js/myCharactersTransitions.js"></script>
-    }
-}
+    <section class="right-section">
+        <div class="info selected">
+            <span class="title"></span>
+            <div class="middle-block">
+                <img src="~/icons/svg/info.svg" alt="" class="info__icon">
+                <p class="info__text">Выберите персонажа в списке слева, чтобы просмотреть подробную информацию о нем.</p>
+            </div>
+            <div class="footer">
+            </div>
+        </div>
+        <div class="characters">
+            <span class="title">Информация о персонаже</span>
+            <div class="character-info middle-block">
+                <table class="character-info__table">
+                    <tr class="row-id" hidden>
+                        <td class="row-id__title">Идентификатор:</td>
+                        <td class="row-id__value"></td>
+                    </tr>
+                    <tr class="row-status">
+                        <td class="row-status__title">Статус:</td>
+                        <td class="row-status__value"></td>
+                    </tr>
+                    <tr class="row-location">
+                        <td class="row-location__title">Локация:</td>
+                        <td class="row-location__value"></td>
+                    </tr>
+                    <tr class="row-level">
+                        <td class="row-level__title">Уровень:</td>
+                        <td class="row-level__value"></td>
+                    </tr>
+                    <tr class="row-class">
+                        <td class="row-class__title">Класс:</td>
+                        <td class="row-class__value"></td>
+                    </tr>
+                    <tr class="row-hours">
+                        <td class="row-hours__title">Часов в игре:</td>
+                        <td class="row-hours__value"></td>
+                    </tr>
+                </table>
+                <div class="character-info__main">
+                    <div>
+                        <div class="gold-balance">
+                            <span class="gold-balance__title">
+                                <img src="~/icons/svg/coins.svg" alt="">
+                                <span>Золото</span>
+                            </span>
+                            <h1 class="gold-balance__value"></h1>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="rating-scores">
+                            <span class="rating-scores__title">
+                                <img src="~/icons/svg/rating.svg" alt="">
+                                <span>Рейтинг</span>
+                            </span>
+                            <h1 class="rating-scores__value"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div id="open-inventory-button" class="character-info__inventory tooltip">
+                    <img src="~/icons/svg/inventory.svg" alt="" />
+                    <span class="tooltip__text">Инвентарь</span>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="creation-date">
+                    <span class="creation-date__title">Дата создания:</span>
+                    <span class="creation-date__value"></span>
+                </div>
+                <button id="delete-character-button" class="accent without-hover-up">Удалить персонажа</button>
+            </div>
+        </div>
+        <div class="heroes">
+            <div class="hero-selection">
+                <span class="title">Создание нового персонажа</span>
+                <div class="hero-selection__grid middle-block">
+                    @foreach (Hero hero in ViewBag.Heroes)
+                    {
+                        <span class="hero-item">
+                            <span class="hero-item__id" hidden>@hero.Id</span>
+                            <img class="hero-item__avatar" src="~/pictures/hero_avatars/@hero.Avatar" alt="" />
+                            <span class="hero-item__name">@hero.Name</span>
+                        </span>
+                    }
+                </div>
+                <div class="hero-selection__info footer">
+                    <img src="~/icons/svg/info.svg" alt="">
+                    <p>Выберите доступного героя из списка, нажав на его иконку.</p>
+                </div>
+            </div>
+            <div class="hero-creation">
+                <span class="return-button">
+                    <img src="~/icons/svg/left-arrow.svg" alt="">
+                </span>
+                <span class="title">Создание нового персонажа</span>
+                <div class="hero-creation__description middle-block">
+                    <span hidden class="selected-hero__id"></span>
+                    <div class="hero-brief">
+                        <img class="hero-brief__avatar" alt="avatar">
+                        <div class="hero-brief__nameclass">
+                            <span class="name">
+                                <span class="name__title">Имя:</span>
+                                <span class="name__value">name</span>
+                            </span>
+                            <span class="class">
+                                <span class="class__title">Класс:</span>
+                                <span class="class__value">class</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="hero-lore">
+                        <p class="hero-lore__text">hero lore</p>
+                    </div>
+                </div>
+                <div class="hero-creation__input footer">
+                    <div class="input-box">
+                        <input id="hero-creation__name" class="without-hover-up" type="text" placeholder="Имя персонажа"> @* !todo add asp-for="CharacterName" *@
+                        <span class="icon"></span>
+                        <span class="error-label">
+                            <span class="icon"></span>
+                            <span class="text"></span>
+                        </span>
+                    </div>
+                    <button id="create-character-button" class="accent without-hover-up">Создать персонажа</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="top-line"></div>
+    <div class="bottom-line"></div>
+</div>
+
+@* Hidden dialog box *@
+<div id="inventory-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <div class="top-line"></div>
+        <h3 class="dialog-box__title">Предметы персонажа</h3>
+        <div class="dialog-box__content">
+            <div class="empty-inventory-message">
+                <b>Список пуст 😥</b>
+                <p>Для покупки предметов перейдите в <a asp-controller="Player" asp-action="Shop">магазин.</a></p>
+            </div>
+            <table class="inventory-table">
+                <thead>
+                    <tr class="inventory-table__headers-row">
+                        <th class="number__header">#</th>
+                        <th class="icon__header">Изображение</th>
+                        <th class="name__header">Название</th>
+                        <th class="amount__header">Количество</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @* filled in via script *@
+                </tbody>
+            </table>
+        </div>
+        <button class="close without-hover-up">Закрыть</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('my-characters-link').classList.add('selected');
+</script>
+
+<script src="~/js/myCharactersTransitions.js"></script>
+<script src="~/js/emptyCharactersHandler.js"></script>
+<script src="~/js/heroSelection.js"></script>
+<script src="~/js/characterSelection.js"></script>
+<script src="~/js/characterRemoval.js"></script>
+<script src="~/js/characterCreation.js"></script>
+<script src="~/js/inventoryHandler.js"></script>

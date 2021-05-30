@@ -42,6 +42,8 @@ namespace GameManager.Controllers
 
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Player");
+
                     model.IsSucceeded = true;
                     return View(model);
                 }
@@ -79,7 +81,17 @@ namespace GameManager.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("MyCharacters", "Player");
+                        User user = _userManager.FindByNameAsync(model.UserName).Result;
+                        var userRoles = _userManager.GetRolesAsync(user).Result;
+
+                        if (userRoles.Contains("Admin"))
+                        {
+                            return RedirectToAction("Players", "Admin");
+                        }
+                        else
+                        {
+                            return RedirectToAction("MyCharacters", "Player");
+                        }
                     }
                 }
                 else

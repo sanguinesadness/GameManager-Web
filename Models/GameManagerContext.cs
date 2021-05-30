@@ -21,6 +21,10 @@ namespace GameManager.Models
 
         public DbSet<CharacterBan> CharacterBans { get; set; }
 
+        public DbSet<Inventory> Inventories { get; set; }
+
+        public DbSet<Mob> Mobs { get; set; }
+
 
         public GameManagerContext(DbContextOptions<GameManagerContext> options) : base(options)
         {

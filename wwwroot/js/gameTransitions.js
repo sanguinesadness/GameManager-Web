@@ -1,40 +1,33 @@
-const sections = document.querySelectorAll('.game-page .game-sections__item');
-const elements = document.querySelectorAll('.game-page .game-elements__item');
-
-const infoPage = document.querySelector('.game-page > .info');
+const infoSection = document.querySelector('.game-page > .info');
 const middleSection = document.querySelector('.game-page > .middle-section');
 const rightSection = document.querySelector('.game-page > .right-section');
 
-function fadeIn(element) {
-    element.style.display = "initial";
+function scaleIn(element, isFlex = false) {
+    if (isFlex)
+        element.style.display = "flex";
+    else
+        element.style.display = "initial";
+
     gsap.fromTo(element,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.5, ease: "power1.out" });
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.5, xPercent: 0, ease: 'back.inOut(2)' });
 }
 
-function fadeOut(element) {
-    gsap.to(element, { opacity: 0, display: "none", duration: 0.5, ease: "power1.out" });
+function scaleOut(element) {
+    gsap.fromTo(element,
+        { scale: 1, opacity: 1 },
+        { scale: 0, opacity: 0, duration: 0.5, display: 'none', ease: 'back.inOut(2)' });
 }
 
-// sections selection handler
-sections.forEach((section) => {
-    section.addEventListener('click', () => {
-        elements.forEach((element) => element.classList.remove('selected'));
-        sections.forEach((section) => section.classList.remove('selected'));
-        section.classList.add('selected');
-        
-        infoPage.style.display = "none";
-        middleSection.style.display = "initial";
-        rightSection.style.display = "none";
-    });
-})
+function addGameSectionsClickEvent() {
+    const sections = document.querySelectorAll('.game-page .game-sections__item');
+    const elements = document.querySelectorAll('.game-page .game-elements__item');
 
-// elements selection handler
-elements.forEach((element) => {
-   element.addEventListener('click', () => {
-       elements.forEach((element) => element.classList.remove('selected'));
-       element.classList.add('selected');
-       
-       rightSection.style.display = "initial";
-   });
-});
+    sections.forEach((section) => {
+        section.addEventListener('click', () => {
+            elements.forEach((element) => element.classList.remove('selected'));
+            sections.forEach((section) => section.classList.remove('selected'));
+            section.classList.add('selected');
+        });
+    })
+}

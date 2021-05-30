@@ -15,41 +15,24 @@ namespace GameManager
                     new Gender() { Name = "Male" },
                     new Gender() { Name = "Female" },
                     new Gender() { Name = "Other" });
-
-                context.SaveChanges();
             }
 
-            if (!context.Users.Any())
+            if (!context.HeroClasses.Any())
             {
-                context.Users.AddRange(
-                    new User()
-                    {
-                        UserName = "RobinBanks",
-                        BirthDate = DateTime.Now,
-                        Email = "robin@gmail.com",
-                        LastConnection = DateTime.Now,
-                        GenderId = 1
-                    },
-                    new User()
-                    {
-                        UserName = "Zhavia12",
-                        BirthDate = DateTime.Now,
-                        Email = "zhavia@gmail.com",
-                        LastConnection = DateTime.Now,
-                        GenderId = 2
-                    },
-                    new User()
-                    {
-                        UserName = "Heartbreaker228",
-                        BirthDate = DateTime.Now,
-                        Email = "hbre28@gmail.com",
-                        LastConnection = DateTime.Now,
-                        GenderId = 3
-                    }
-                    );
-                
-                context.SaveChanges();
+                context.Add(new HeroClass() { Id = 1, Name = "Сила" });
             }
+
+            if (!context.Heroes.Any())
+            {
+                context.Add(new Hero() { Id = 1, HeroClassId = 1, Name = "Lina" });
+            }
+
+            if (!context.Locations.Any())
+            {
+                context.Add(new Location() { Id = 1, Name = "Тельдрассил" });
+            }
+
+            context.SaveChanges();
         }
     }
 }

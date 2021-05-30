@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Game";
+    ViewData["Title"] = "Shop";
     Layout = "_PlayerLayout";
 }
 
@@ -8,22 +8,14 @@
         <span class="title">Доступные категории</span>
         <div class="middle-block item-categories__wrapper">
             <div class="item-categories">
-                <div class="item-categories__item">
-                    <img src="~/pictures/category_icons/armor.svg" alt="">
-                    <span>Броня</span>
-                </div>
-                <div class="item-categories__item selected">
-                    <img src="~/pictures/category_icons/weapon.svg" alt="">
-                    <span>Оружие</span>
-                </div>
-                <div class="item-categories__item">
-                    <img src="~/pictures/category_icons/magic.svg" alt="">
-                    <span>Магия</span>
-                </div>
-                <div class="item-categories__item">
-                    <img src="~/pictures/category_icons/artefact.svg" alt="">
-                    <span>Артефакты</span>
-                </div>
+                @foreach (var category in ViewBag.ItemCategories)
+                {
+                    <div class="item-categories__item">
+                        <span class="category__id" hidden>@category.Id</span>
+                        <img class="category__icon" src="~/pictures/category_icons/@category.Icon" alt="" />
+                        <span class="category__name">@category.Name</span>
+                    </div>
+                }
             </div>
         </div>
         <div class="footer">
@@ -39,84 +31,13 @@
             <div class="items">
                 <span class="items__title">Оружие</span>
                 <div class="items__grid">
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/abyssal.png" alt="">
-                        <span class="item__name">Abyssal Blade</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/armlet.png" alt="">
-                        <span class="item__name">Armlet of Mordiggan</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/basher.png" alt="">
-                        <span class="item__name">Basher</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/battlefury.png" alt="">
-                        <span class="item__name">Battlefury</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/bloodthorn.png" alt="">
-                        <span class="item__name">Bloodthorn</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/butterfly.png" alt="">
-                        <span class="item__name">Butterfly</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/crystalys.png" alt="">
-                        <span class="item__name">Crystalys</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/deadalus.png" alt="">
-                        <span class="item__name">Deadalus</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/desolator.png" alt="">
-                        <span class="item__name">Desolator</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/etheralblade.png" alt="">
-                        <span class="item__name">Etheral Blade</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/meteor.png" alt="">
-                        <span class="item__name">Meteor Hammer</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/mkb.png" alt="">
-                        <span class="item__name">Monkey King Bar</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/rapier.png" alt="">
-                        <span class="item__name">Divine Rapier</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/shadowblade.png" alt="">
-                        <span class="item__name">Shadow Blade</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
-                        <span class="item__name">Silver Edge</span>
-                    </div>
-
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
-                        <span class="item__name">Silver Edge</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
-                        <span class="item__name">Silver Edge</span>
-                    </div>
-                    <div class="item">
-                        <img class="item__icon" src="~/pictures/item_icons/silveredge.png" alt="">
-                        <span class="item__name">Silver Edge</span>
-                    </div>
+                    @* filled in via script *@
                 </div>
             </div>
+            <span hidden class="character__id">@ViewBag.SelectedCharacter.Id</span>
             <div class="gold-balance">
                 <img class="gold-balance__icon" src="~/icons/svg/coins2.svg" alt="">
-                <span class="gold-balance__value">2507</span>
+                <span class="gold-balance__value">@ViewBag.SelectedCharacter.Gold</span>
             </div>
         </div>
         <div class="footer">
@@ -126,10 +47,84 @@
             </div>
         </div>
     </section>
+    <div class="info">
+        <span class="title"></span>
+        <div class="middle-block">
+            <img src="~/icons/svg/info.svg" alt="" class="info__icon">
+            <p class="info__text">Выберите категорию предметов в списке слева.</p>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
 
     @* Decorative blocks on top and bottom *@
     <div class="top-line"></div>
     <div class="bottom-line"></div>
 </div>
 
+@* Hidden dialog box #1 *@
+<div id="item-selected-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title">Покупка предмета</h3>
+        <div class="dialog-box__content">
+            <span hidden class="dialog-item__id"></span>
+            <img class="dialog-item__icon" src="~/pictures/item_icons/blade_mail.png" alt="">
+            <table class="dialog-item__info">
+                <tr class="item-name">
+                    <td class="item-name__title">Предмет:</td>
+                    <td class="item-name__value">Boots of Travel</td>
+                </tr>
+                <tr class="item-amount">
+                    <td class="item-amount__title">Количество:</td>
+                    <td class="item-amount__value">
+                        <select>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="item-price">
+                    <td class="item-price__title">Стоимость:</td>
+                    <td class="item-price__value">2100</td>
+                </tr>
+            </table>
+        </div>
+        <div class="dialog-box__buttons">
+            <button class="cancel accent without-hover-up">Назад</button>
+            <button id="buy-item-button" class="close accent without-hover-up">Купить</button>
+        </div>
+    </div>
+</div>
+
+@* Hidden dialog box #2 *@
+<div id="successful-purchase-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title success">Покупка предмета</h3>
+        <p class="dialog-box__message">
+            Предмет успешно добавлен в ваш <a asp-action="MyCharacters" asp-controller="Player">Инвентарь</a>.
+        </p>
+        <button class="dialog-box__button accent close without-hover-up">Закрыть</button>
+    </div>
+</div>
+
+@* Hidden dialog box #2 *@
+<div id="failed-purchase-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title fault">Покупка предмета</h3>
+        <p class="dialog-box__message">
+            У вашего персонажа <b>не хватает</b> золота для совершения покупки.
+        </p>
+        <button class="dialog-box__button accent close without-hover-up">Закрыть</button>
+    </div>
+</div>
+
+<script>
+    document.getElementById('shop-link').classList.add('selected');
+</script>
 <script src="~/js/shopTransitions.js"></script>
+<script src="~/js/shopItemSelector.js"></script>
+<script src="~/js/shopCategorySelector.js"></script>
+<script src="~/js/itemPurchase.js"></script>

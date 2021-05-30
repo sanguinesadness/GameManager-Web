@@ -20,8 +20,8 @@ namespace GameManager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserValidator<User>, CustomUserValidator>(
-                serv => new CustomUserValidator());
+            //services.AddTransient<IUserValidator<User>, CustomUserValidator>(
+            //    serv => new CustomUserValidator());
 
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<GameManagerContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));

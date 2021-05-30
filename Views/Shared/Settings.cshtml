@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+    if (User.IsInRole("Player"))
+        Layout = "_PlayerLayout";
+    if (User.IsInRole("Admin"))
+        Layout = "_AdminLayout";
+}
+
+<div class="settings-page">
+    <h1>🌿</h1>
+</div>
+
+<script>
+    document.getElementById('settings-link').classList.add('selected');
+</script>

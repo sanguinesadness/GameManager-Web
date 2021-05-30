@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Account";
+    if (User.IsInRole("Player"))
+        Layout = "_PlayerLayout";
+    if (User.IsInRole("Admin"))
+        Layout = "_AdminLayout";
+}
+
+<div class="account-page">
+    <div class="left-section">
+        <span class="title">Доступные действия</span>
+        <div class="middle-block account-sections__wrapper">
+            <div class="account-sections">
+                <div id="edit-account-section" class="account-sections__item">
+                    <img src="~/icons/svg/edit-account.svg" alt="">
+                    <span>Изменить личные данные</span>
+                </div>
+                <div id="logout-section" class="account-sections__item">
+                    <img src="~/icons/svg/logout.svg" alt="">
+                    <span>Выйти из аккаунта</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+    <div class="right-section">
+        <h1>Right section</h1>
+    </div>
+    <div class="info">
+        <span class="title"></span>
+        <div class="middle-block">
+            <img src="~/icons/svg/info.svg" alt="" class="info__icon">
+            <p class="info__text">Выберите нужное действие из списка слева.</p>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+
+    @* Decorative blocks on top and bottom *@
+    <div class="top-line"></div>
+</div>
+
+@* Hidden dialog box *@
+<div id="logout-confirm-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title fault">Подтверждение действия</h3>
+        <p class="dialog-box__message">
+            Вы действительно хотите совершить <b>выход</b> из аккаунта <b>@User.Identity.Name</b>?
+        </p>
+        <div class="dialog-box__buttons">
+            <button class="close accent without-hover-up">Нет</button>
+            <form method="post" asp-action="Logout" asp-controller="Account">
+                <button type="submit" class="without-hover-up">Да</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('account-link').classList.add('selected');
+</script>
+<script src="~/js/accountTransitions.js"></script>
+<script src="~/js/accountActionSelection.js"></script>

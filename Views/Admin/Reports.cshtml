@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+    Layout = "_AdminLayout";
+}
+
+<div class="reports-page">
+    <section class="left-section">
+        <span class="title">Доступные запросы</span>
+        <div class="middle-block reports-queries__wrapper">
+            <div class="reports-queries">
+                <div id="top-rating-button" class="reports-queries__item">
+                    <i class="fi-rr-star"></i>
+                    <span class="query-name">Топ рейтинга</span>
+                </div>
+                <div id="top-active-button" class="reports-queries__item">
+                    <i class="fi-rr-clock"></i>
+                    <span class="query-name">Самые активные игроки</span>
+                </div>
+                <div id="top-inventories-button" class="reports-queries__item">
+                    <i class="fi-rr-backpack"></i>
+                    <span class="query-name">Самые дорогие инвентари</span>
+                </div>
+                <div id="richest-players-button" class="reports-queries__item">
+                    <i class="fi-rr-dollar"></i>
+                    <span class="query-name">Самые богатые игроки</span>
+                </div>
+                <div id="top-levels-button" class="reports-queries__item">
+                    <i class="fi-rr-crown"></i>
+                    <span class="query-name">Самые высокие уровни</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+
+        </div>
+    </section>
+    <section class="right-section">
+        <div id="query-title" class="title">Самые дорогие инвентари</div>
+        <div class="middle-block query-table__wrapper">
+            <table id="query-table">
+                <thead>
+                    @* filled in via script *@
+                </thead>
+                <tbody>
+                    @* filled in via script *@
+                </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <button id="excel-export-button" class="flat">Экспортировать в Excel...</button>
+        </div>
+    </section>
+    <div class="info">
+        <span class="title"></span>
+        <div class="middle-block">
+            <img src="~/icons/svg/info.svg" alt="" class="info__icon">
+            <p class="info__text">Выберите запрос из списка слева, чтобы осуществить выборку данных.</p>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+
+    @* Decorative blocks on top and bottom *@
+    <div class="top-line"></div>
+    <div class="bottom-line"></div>
+</div>
+
+<script>
+    document.getElementById('reports-link').classList.add('selected');
+</script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script src="~/js/Reports/lib.js"></script>
+<script src="~/js/Reports/querySelector.js"></script>
+<script src="~/js/Reports/table2excel.js"></script>

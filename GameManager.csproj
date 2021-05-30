@@ -5,6 +5,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="wwwroot\js\NewFolder1\**" />
+      <Content Remove="wwwroot\js\NewFolder1\**" />
+      <EmbeddedResource Remove="wwwroot\js\NewFolder1\**" />
+      <None Remove="wwwroot\js\NewFolder1\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css" />

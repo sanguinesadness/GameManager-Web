@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GameManager.Models
 {
     public class Gender

@@ -2,24 +2,45 @@
     Layout = "_Layout";
 }
 
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        <div class="no-account-form">
+            <h3 class="title">Ошибка входа</h3>
+            <p class="message">
+                Просмотр содержимого невозможен! Похоже, вы не вошли в <b>аккаунт</b> 🧐.
+                <br />
+                Попробуйте <a asp-action="Register" asp-controller="Account">создать</a> новый
+                или <a asp-action="Login" asp-controller="Account">войти</a> в существующий.
+            </p>
+            <form method="get" asp-action="Login" asp-controller="Account">
+                <button type="submit" class="accent close without-hover-up">Выйти</button>
+            </form>
+        </div>
+
+        IgnoreBody();
+        return;
+    }
+}
+
 <div class="player-form">
     <div class="navbar">
         <div class="navbar__first-group">
-            <a class="navbar__item selected" asp-action="MyCharacters" asp-controller="Player">
+            <a id="my-characters-link" class="navbar__item" asp-action="MyCharacters" asp-controller="Player">
                 <span>Мои персонажи</span>
             </a>
-            <a class="navbar__item" asp-action="Game" asp-controller="Player">
+            <a id="game-link" class="navbar__item" asp-action="Game" asp-controller="Player">
                 <span>Игра</span>
             </a>
-            <a class="navbar__item" asp-action="Shop" asp-controller="Player">
+            <a id="shop-link" class="navbar__item" asp-action="Shop" asp-controller="Player">
                 <span>Магазин</span>
             </a>
         </div>
         <div class="navbar__second-group">
-            <a class="navbar__item" asp-action="" asp-controller="">
+            <a id="settings-link" class="navbar__item" asp-action="Settings" asp-controller="Player">
                 <img src="~/icons/svg/settings.svg" alt="" />
             </a>
-            <a class="navbar__item" asp-action="" asp-controller="">
+            <a id="account-link" class="navbar__item" asp-action="Account" asp-controller="Player">
                 <img src="~/icons/svg/user.svg" alt="" />
             </a>
         </div>
@@ -30,4 +51,17 @@
     </div>
 </div>
 
+@* Hidden dialog box *@
+<div id="no-character-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title fault">Персонаж не выбран</h3>
+        <p class="dialog-box__message">
+            Чтобы перейти в магазин, вам сперва нужно выбрать персонажа на странице
+            <a asp-action="MyCharacters" asp-controller="Player">Мои персонажи</a>.
+        </p>
+        <button class="dialog-box__button accent close without-hover-up">Закрыть</button>
+    </div>
+</div>
+
 <script src="~/js/navbarManager.js"></script>
+<script src="~/js/checkSelectedCharacter.js"></script>

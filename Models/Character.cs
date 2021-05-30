@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GameManager.Models
 {
@@ -7,14 +10,14 @@ namespace GameManager.Models
         public int Id { get; set; }
         
         public string Name { get; set; }
-        
-        public int UserId { get; set; }
-        public User User { get; set; }
-        
+
+        public virtual User User { get; set; }
+        public string UserId { get; set; }
+
+        public virtual Hero Hero { get; set; }
         public int HeroId { get; set; }
-        public Hero Hero { get; set; }
         
-        public int CurrentLocationId { get; set; }
+        public virtual int CurrentLocationId { get; set; }
         public Location CurrentLocation { get; set; }
         
         public DateTime CreationDate { get; set; }

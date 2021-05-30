@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@{
+    if (!User.Identity.IsAuthenticated)
+    {
+        <div class="no-account-form">
+            <h3 class="title">Ошибка входа</h3>
+            <p class="message">
+                Просмотр содержимого невозможен! Похоже, вы не вошли в <b>аккаунт</b> 🧐.
+                <br />
+                Попробуйте <a asp-action="Register" asp-controller="Account">создать</a> новый
+                или <a asp-action="Login" asp-controller="Account">войти</a> в существующий.
+            </p>
+            <form method="get" asp-action="Login" asp-controller="Account">
+                <button type="submit" class="accent close without-hover-up">Выйти</button>
+            </form>
+        </div>
+
+        IgnoreBody();
+        return;
+    }
+}
+
+<div class="admin-form">
+    <div class="navbar">
+        <div class="navbar__first-group">
+            <a id="players-link" class="navbar__item" asp-action="Players" asp-controller="Admin">
+                <span>Игроки</span>
+            </a>
+            <a id="reports-link" class="navbar__item" asp-action="Reports" asp-controller="Admin">
+                <span>Отчеты</span>
+            </a>
+        </div>
+        <div class="navbar__second-group">
+            <a id="settings-link" class="navbar__item" asp-action="Settings" asp-controller="Admin">
+                <img src="~/icons/svg/settings.svg" alt="" />
+            </a>
+            <a id="account-link" class="navbar__item" asp-action="Account" asp-controller="Admin">
+                <img src="~/icons/svg/user.svg" alt="" />
+            </a>
+        </div>
+    </div>
+
+    <div class="admin-form__content">
+        @RenderBody()
+    </div>
+</div>
+
+<script src="~/js/navbarManager.js"></script>

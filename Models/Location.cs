@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GameManager.Models
 {
     public class Location
@@ -5,6 +7,8 @@ namespace GameManager.Models
         public int Id { get; set; }
         
         public string Name { get; set; }
+
+        public string Icon { get; set; }
         
         public string Description { get; set; }
     }
