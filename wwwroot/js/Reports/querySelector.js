@@ -1,7 +1,10 @@
 ﻿const table = document.getElementById('query-table');
 
 const topRatingButton = document.getElementById('top-rating-button');
+const mostActiveButton = document.getElementById('most-active-button');
+const topInventoriesButton = document.getElementById('top-inventories-button');
 const richestPlayersButton = document.getElementById('richest-players-button');
+const topLevelsButton = document.getElementById('top-levels-button');
 
 const allButtons = document.querySelectorAll('.reports-page .reports-queries__item');
 
@@ -74,7 +77,47 @@ topRatingButton.addEventListener('click', () => {
 
     $.ajax({
         type: 'GET',
-        url: '/Admin/GetTopRatingTable',
+        url: '/Admin/GetTopRatingReport',
+        success: (result) => {
+            fillTableHeaders(headers);
+            fillTableData(result);
+            setQueryTitle(title);
+            showTable();
+        }
+    });
+});
+
+mostActiveButton.addEventListener('click', () => {
+    if (mostActiveButton.classList.contains('selected')) {
+        return;
+    }
+
+    let headers = ["Игрок", "Персонажей", "Всего часов", "Часов в среднем"];
+    const title = mostActiveButton.querySelector('.query-name').innerText;
+
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/GetMostActiveReport',
+        success: (result) => {
+            fillTableHeaders(headers);
+            fillTableData(result);
+            setQueryTitle(title);
+            showTable();
+        }
+    });
+});
+
+topInventoriesButton.addEventListener('click', () => {
+    if (topInventoriesButton.classList.contains('selected')) {
+        return;
+    }
+
+    let headers = ["Персонаж", "Предметов", "Стоимость", "Игрок"];
+    const title = topInventoriesButton.querySelector('.query-name').innerText;
+
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/GetTopInventoriesReport',
         success: (result) => {
             fillTableHeaders(headers);
             fillTableData(result);
@@ -89,12 +132,32 @@ richestPlayersButton.addEventListener('click', () => {
         return;
     }
 
-    let headers = ["Игрок", "Персонажи", "Всего золота"];
+    let headers = ["Игрок", "Персонажей", "Всего золота"];
     const title = richestPlayersButton.querySelector('.query-name').innerText;
 
     $.ajax({
         type: 'GET',
-        url: '/Admin/GetRichestPlayersTable',
+        url: '/Admin/GetRichestPlayersReport',
+        success: (result) => {
+            fillTableHeaders(headers);
+            fillTableData(result);
+            setQueryTitle(title);
+            showTable();
+        }
+    });
+});
+
+topLevelsButton.addEventListener('click', () => {
+    if (topLevelsButton.classList.contains('selected')) {
+        return;
+    }
+
+    let headers = ["Персонаж", "Уровень", "Игрок"];
+    const title = topLevelsButton.querySelector('.query-name').innerText;
+
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/GetTopLevelsReport',
         success: (result) => {
             fillTableHeaders(headers);
             fillTableData(result);

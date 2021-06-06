@@ -1796,28 +1796,30 @@
     ]
   },
   "packageFolders": {
-    "/Users/ihavebadimagination/.nuget/packages/": {},
-    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
+    "C:\\Users\\helio\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/ihavebadimagination/Web/GameManager-Web/GameManager.csproj",
+      "projectUniqueName": "c:\\Users\\helio\\source\\repos\\GameManager\\GameManager\\GameManager.csproj",
       "projectName": "GameManager",
-      "projectPath": "/Users/ihavebadimagination/Web/GameManager-Web/GameManager.csproj",
-      "packagesPath": "/Users/ihavebadimagination/.nuget/packages/",
-      "outputPath": "/Users/ihavebadimagination/Web/GameManager-Web/obj/",
+      "projectPath": "c:\\Users\\helio\\source\\repos\\GameManager\\GameManager\\GameManager.csproj",
+      "packagesPath": "C:\\Users\\helio\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\helio\\source\\repos\\GameManager\\GameManager\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/ihavebadimagination/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\helio\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1867,7 +1869,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

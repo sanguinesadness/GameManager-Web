@@ -5,14 +5,14 @@ function createTableRow(item, number) {
     const row = document.createElement('tr');
     row.classList.add('characters-table-row');
     
+    const numberCell = document.createElement('td');
+    numberCell.classList.add('number__value');
+    numberCell.innerText = number.toString();
+
     const idCell = document.createElement('td');
     idCell.hidden = true;
     idCell.classList.add('id__value');
     idCell.innerText = item.id.toString();
-    
-    const numberCell = document.createElement('td');
-    numberCell.classList.add('number__value');
-    numberCell.innerText = number.toString();
 
     const iconCell = document.createElement('td');
     iconCell.classList.add('icon__value');
@@ -48,8 +48,8 @@ function createTableRow(item, number) {
         statusCell.classList.add('banned');
     }
     
-    row.appendChild(idCell);
     row.appendChild(numberCell);
+    row.appendChild(idCell);
     row.appendChild(iconCell);
     row.appendChild(nameCell);
     row.appendChild(lvlCell);

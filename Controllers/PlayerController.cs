@@ -210,7 +210,7 @@ namespace GameManager.Controllers
             }
 
             ViewBag.ItemCategories = await _db.ItemCategories.ToListAsync();
-            ViewBag.SelectedCharacter = _db.Characters.FindAsync(_selectedCharacter.Id);
+            ViewBag.SelectedCharacter = _db.Characters.Find(_selectedCharacter.Id);
 
             return PartialView();
         }
