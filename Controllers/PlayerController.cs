@@ -126,6 +126,8 @@ namespace GameManager.Controllers
             var result = _db.Characters.Remove(character);
             _db.SaveChanges();
 
+            _selectedCharacter = null;
+
             return Ok(result.State.ToString());
         }
 
@@ -208,7 +210,7 @@ namespace GameManager.Controllers
             }
 
             ViewBag.ItemCategories = await _db.ItemCategories.ToListAsync();
-            ViewBag.SelectedCharacter = _db.Characters.Find(_selectedCharacter.Id);
+            ViewBag.SelectedCharacter = _db.Characters.FindAsync(_selectedCharacter.Id);
 
             return PartialView();
         }
@@ -291,13 +293,13 @@ namespace GameManager.Controllers
         [HttpGet]
         public IActionResult Settings()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
         public IActionResult Account()
         {
-            return View();
+            return PartialView();
         }
     }
 }

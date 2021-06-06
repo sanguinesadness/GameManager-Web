@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameManager.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace GameManager.Controllers
 {
@@ -19,27 +21,84 @@ namespace GameManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult Players()
+        public async Task<IActionResult> Players()
         {
-            return View();
+            List<UserInfoViewModel> usersInfo = new List<UserInfoViewModel>();
+            
+            var userRoles = _db.UserRoles.ToList();
+            var allRoles = _db.Roles.ToList();
+            
+            foreach (var user in _db.Users)
+            {
+                var result = userRoles.Where(ur => ur.UserId == user.Id)
+                    .Join(allRoles, ur => ur.RoleId, r => r.Id,
+                        (ur, r) => r.Name).ToList();
+
+                var userInfo = new UserInfoViewModel()
+                {
+                    Id = user.Id,
+                    Name = user.UserName,
+                    Roles = result
+                };
+            
+                usersInfo.Add(userInfo);
+            }
+            
+            return PartialView(usersInfo);
         }
 
         [HttpGet]
         public IActionResult Reports()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
         public IActionResult Settings()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
         public IActionResult Account()
         {
-            return View();
+            return PartialView();
+        }
+
+        [HttpGet]
+        public IActionResult GetPlayerCharacters(string playerId)
+        {
+            List<Character> characters = _db.Characters.Where(c => c.UserId == playerId)
+                                                       .Include(c => c.Hero).ToList();
+            
+            if (characters.Count == 0)
+            {
+                return NotFound();
+            }
+
+            List<CharactersTableItem> result = new List<CharactersTableItem>();
+
+            foreach (var character in characters)
+            {
+                CharactersTableItem tableItem = new CharactersTableItem()
+                {
+                    Id = character.Id,
+                    Name = character.Name,
+                    Level = character.Lvl,
+                    Icon = character.Hero.Icon,
+                    Gold = character.Gold,
+                    Rating = character.Rating
+                };
+            
+                if (!_db.CharacterBans.Where(cb => cb.CharacterId == character.Id).Any())
+                    tableItem.Status = CharacterStatus.Active;
+                else
+                    tableItem.Status = CharacterStatus.Banned;
+
+                result.Add(tableItem);
+            }
+
+            return Ok(result);
         }
 
         [HttpGet]

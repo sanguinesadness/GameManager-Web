@@ -1,10 +1,86 @@
-﻿@{ 
+﻿@model List<GameManager.ViewModels.UserInfoViewModel>
+@{ 
     ViewData["Title"] = "Players";
     Layout = "_AdminLayout";
 }
 
-<h1>Players</h1>
+<div class="players-page">
+    <section class="left-section">
+        <span class="title">Список игроков</span>
+        <div class="middle-block player-list__wrapper">
+            <div class="empty-players-block">
+                <div>
+                    <span class="empty-players-block__text">Список игроков пуст</span>
+                    <span class="crying-emoji">😥</span>
+                </div>
+            </div>
+            <div class="player-list">
+                @foreach (var user in Model)
+                {
+                    if (user.Roles.Contains("Player"))
+                    {
+                        <div class="player-list__item">
+                            <i class="fi-rr-user"></i>
+                            <span class="player-id" hidden>@user.Id</span>
+                            <span class="player-name">@user.Name</span>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="footer">
+            <div class="input-box search">
+                <input class="search without-hover-up" type="text" placeholder="Найти игроков" id="player-search"/>
+            </div>
+        </div>
+    </section>
+    <section class="right-section">
+        <span class="title">Персонажи игрока
+            <b id="selected-player-name">player</b>
+        </span>
+        <div class="middle-block characters-table__wrapper">
+            <table id="characters-table">
+                <thead>
+                    <th class="number__header">#</th>
+                    <th class="icon__header">Иконка</th>
+                    <th class="name__header">Имя</th>
+                    <th class="lvl__header">Уровень</th>
+                    <th class="gold__header">Золото</th>
+                    <th class="rating__header">Рейтинг</th>
+                    <th class="ban__header">Бан</th>
+                </thead>
+                <tbody>
+                    @* filled in via script *@
+                </tbody>
+            </table>
+            <div id="characters-table-context-menu" class="context-menu">
+                <span class="context-menu-item block">Заблокировать</span>
+                <span class="context-menu-item unblock">Разблокировать</span>
+            </div>
+        </div>
+        <div class="footer">
+            @* empty *@
+        </div>
+    </section>
+    <div class="info">
+        <span class="title"></span>
+        <div class="middle-block">
+            <img src="~/icons/svg/info.svg" alt="" class="info__icon">
+            <p class="info__text">Выберите игрока из списка слева, чтобы открыть список его персонажей.</p>
+        </div>
+        <div class="footer">
+        </div>
+    </div>
+    
+    @* Decorative blocks on top and bottom *@
+    <div class="top-line"></div>
+    <div class="bottom-line"></div>
+</div>
 
 <script>
     document.getElementById('players-link').classList.add('selected');
 </script>
+<script src="~/js/Players/init.js"></script>
+<script src="~/js/Players/contextMenuHandler.js"></script>
+<script src="~/js/Players/playerSelector.js"></script>
+<script src="~/js/Players/playerSearch.js"></script>

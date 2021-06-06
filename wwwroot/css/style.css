@@ -434,6 +434,57 @@ button.without-hover-up:active, .button.without-hover-up:active {
           flex-direction: column;
 }
 
+.input-box.search {
+  -webkit-transition: -webkit-transform 300ms ease;
+  transition: -webkit-transform 300ms ease;
+  transition: transform 300ms ease;
+  transition: transform 300ms ease, -webkit-transform 300ms ease;
+}
+
+.input-box.search::after {
+  z-index: 1;
+  background: url(../icons/svg/search.svg);
+  opacity: 0.8;
+  background-size: contain;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  content: "";
+}
+
+.input-box.search > input[type="text"] {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  -webkit-box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+          box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  border: unset;
+  z-index: 0;
+}
+
+.input-box.search > input[type="text"]::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.input-box.search > input[type="text"]:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.input-box.search > input[type="text"]::-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.input-box.search > input[type="text"]::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.input-box.search:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
 .input-box:hover .error-label {
   opacity: 1;
   -webkit-transform: translateY(32px);
@@ -905,6 +956,10 @@ button.without-hover-up:active, .button.without-hover-up:active {
   margin-top: 8px;
 }
 
+.content .reg-form .reg-form__content form[name="reg"] .input-grid .gender-selection:focus {
+  outline: none;
+}
+
 .content .reg-form .reg-form__content form[name="reg"] .input-grid .gender-selection input {
   height: 25px;
 }
@@ -1119,6 +1174,191 @@ button.without-hover-up:active, .button.without-hover-up:active {
   width: 375px;
 }
 
+.content .admin-form .admin-form__content .players-page .left-section {
+  width: 375px;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper {
+  padding: 20px 0;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .empty-players-block {
+  display: none;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .empty-players-block .empty-players-block__text {
+  margin-right: 5px;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list {
+  padding: 0 20px;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list .player-list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding: 16px 15px 16px 90px;
+  margin-bottom: 5px;
+  border-radius: 20px;
+  -webkit-transition: 400ms -webkit-transform;
+  transition: 400ms -webkit-transform;
+  transition: 400ms transform;
+  transition: 400ms transform, 400ms -webkit-transform;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list .player-list__item:hover, .content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list .player-list__item:focus {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list .player-list__item:active {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list .player-list__item.selected {
+  background: #ebe2ff;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list .player-list__item .player-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .player-list__wrapper .player-list .player-list__item i {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-right: 10px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section {
+  display: none;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .title > #selected-player-name {
+  margin-left: 5px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper {
+  padding: 30px 50px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tr {
+  border: unset;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table td.number__value,
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table th.number__header {
+  padding-left: 10px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table td.name__value,
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table th.name__header {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 100px;
+  padding-right: 20px;
+  padding-left: 20px;
+  text-align: left;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table td.icon__value > img {
+  height: 40px;
+  margin-bottom: -4px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table thead th {
+  height: 40px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row {
+  cursor: pointer;
+  -webkit-transition: 400ms -webkit-transform;
+  transition: 400ms -webkit-transform;
+  transition: 400ms transform;
+  transition: 400ms transform, 400ms -webkit-transform;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row:hover, .content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row:focus {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row:active {
+  -webkit-transform: scale(1.02);
+          transform: scale(1.02);
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row:nth-child(2n - 1) {
+  background: #f7f2ff;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row td {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row td.status__value {
+  font-weight: bold;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row td.status__value.active::after {
+  content: "Нет";
+  color: #1ed068;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row td.status__value.banned::after {
+  content: "Да";
+  color: #f4364f;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row td:nth-child(1) {
+  border-radius: 15px 0 0 15px;
+}
+
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table tbody tr.characters-table-row td:nth-last-child(1) {
+  border-radius: 0 15px 15px 0;
+}
+
+.content .admin-form .admin-form__content .players-page .info {
+  position: absolute;
+  height: 100%;
+  right: 0;
+}
+
 .content .admin-form .admin-form__content .reports-page .left-section {
   width: 375px;
 }
@@ -1168,8 +1408,8 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 .content .admin-form .admin-form__content .reports-page .left-section .reports-queries__wrapper .reports-queries .reports-queries__item:active {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
 }
 
 .content .admin-form .admin-form__content .reports-page .left-section .reports-queries__wrapper .reports-queries .reports-queries__item i {
@@ -1189,11 +1429,6 @@ button.without-hover-up:active, .button.without-hover-up:active {
 
 .content .admin-form .admin-form__content .reports-page .right-section .query-table__wrapper {
   padding: 30px 50px;
-  overflow-y: scroll;
-}
-
-.content .admin-form .admin-form__content .reports-page .right-section .query-table__wrapper::-webkit-scrollbar {
-  display: none;
 }
 
 .content .admin-form .admin-form__content .reports-page .right-section .query-table__wrapper table.query-table {
@@ -1224,13 +1459,13 @@ button.without-hover-up:active, .button.without-hover-up:active {
   padding: 15px 15px 15px 25px;
 }
 
-.content .admin-form .admin-form__content .account-page .right-section,
-.content .admin-form .admin-form__content .account-page .info {
-  width: calc(100% - 375px);
-}
-
 .content .admin-form .admin-form__content .account-page .right-section {
   display: none;
+}
+
+.content .admin-form .admin-form__content .info,
+.content .admin-form .admin-form__content .right-section {
+  width: calc(100% - 375px);
 }
 
 .content .admin-form table {
@@ -1240,7 +1475,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 .content .admin-form table tr {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .content .admin-form table thead {
@@ -1353,10 +1588,10 @@ button.without-hover-up:active, .button.without-hover-up:active {
   font-size: 1.1em;
   width: 190px;
   text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  padding-right: 10px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  padding-right: 10px;
 }
 
 .content .player-form .player_form__content .my-characters-page .left-section .characters-list .character-item .character:active {
@@ -2678,9 +2913,9 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 #inventory-dialog-box .dialog-box .dialog-box__content .inventory-table tbody td.name__value {
+  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 #inventory-dialog-box .dialog-box .dialog-box__content .empty-inventory-message {
@@ -2733,5 +2968,48 @@ button.without-hover-up:active, .button.without-hover-up:active {
 
 #logout-confirm-dialog-box .dialog-box .dialog-box__buttons > form button {
   width: 100%;
+}
+
+.context-menu {
+  visibility: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: absolute;
+  padding: 10px 0;
+  background: #f7f7f7;
+  border-radius: 15px;
+  -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+          box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  font-size: 0.85em;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.context-menu .context-menu-item {
+  padding: 8px 20px;
+  color: #aaaaaa;
+  cursor: default;
+}
+
+.context-menu .context-menu-item::-moz-selection {
+  background: none;
+}
+
+.context-menu .context-menu-item::selection {
+  background: none;
+}
+
+.context-menu .context-menu-item.enabled {
+  color: #646464;
+  cursor: pointer;
+}
+
+.context-menu .context-menu-item.enabled:hover {
+  background: #e6e6e6;
 }
 /*# sourceMappingURL=style.css.map */
