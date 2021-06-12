@@ -9,6 +9,7 @@
       <Content Remove="wwwroot\js\NewFolder1\**" />
       <EmbeddedResource Remove="wwwroot\js\NewFolder1\**" />
       <None Remove="wwwroot\js\NewFolder1\**" />
+      <None Include="wwwroot\js\Account\editFormHandler.js" />
     </ItemGroup>
 
     <ItemGroup>

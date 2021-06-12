@@ -61,12 +61,6 @@ namespace GameManager.Controllers
         }
 
         [HttpGet]
-        public IActionResult Account()
-        {
-            return PartialView();
-        }
-
-        [HttpGet]
         public IActionResult GetPlayerCharacters(string playerId)
         {
             List<Character> characters = _db.Characters.Where(c => c.UserId == playerId)
@@ -206,6 +200,43 @@ namespace GameManager.Controllers
                                   .ToListAsync();
 
             return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BanCharacter(int characterId, string reason)
+        {
+            var characterBan = new CharacterBan()
+            {
+                CharacterId = characterId,
+                Date = DateTime.Now,
+                Reason = string.IsNullOrEmpty(reason) ? "No Reason" : reason
+            };
+
+            var result = await _db.CharacterBans.AddAsync(characterBan);
+            await _db.SaveChangesAsync();
+
+            if (result is null)
+            {
+                return Problem("The unknown error occured during the request.");
+            }
+
+            return Ok(result.Entity);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> UnbanCharacter(int characterId)
+        {
+            var characterBan = await _db.CharacterBans.Where(cb => cb.CharacterId == characterId).FirstOrDefaultAsync();
+
+            var result = _db.CharacterBans.Remove(characterBan);
+            await _db.SaveChangesAsync();
+            
+            if (result is null)
+            {
+                return Problem("The unknown error occured during the request.");
+            }
+
+            return Ok(result.Entity);
         }
     }
 }

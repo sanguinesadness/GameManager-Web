@@ -1,6 +1,7 @@
 const infoSection = document.querySelector('.game-page > .info');
 const middleSection = document.querySelector('.game-page > .middle-section');
 const rightSection = document.querySelector('.game-page > .right-section');
+const selectedSectionName = document.getElementById('selected-section-name');
 
 function scaleIn(element, isFlex = false) {
     if (isFlex)
@@ -28,6 +29,11 @@ function addGameSectionsClickEvent() {
             elements.forEach((element) => element.classList.remove('selected'));
             sections.forEach((section) => section.classList.remove('selected'));
             section.classList.add('selected');
+
+            selectedSectionName.innerText = section.querySelector('span').innerText;
+            gsap.fromTo(selectedSectionName,
+                { scale: 0, opacity: 0 },
+                { scale: 1, opacity: 1, duration: 0.5, ease: 'back.inOut(2)' });
         });
     })
 }

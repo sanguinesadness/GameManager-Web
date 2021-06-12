@@ -1,6 +1,32 @@
 const table = document.getElementById('characters-table');
 const playerItemElements = document.querySelectorAll('.player-list__item');
 
+let selectedPlayerId;
+let selectedPlayerName;
+
+let selectedSection = infoSection;
+
+function showEmptyCharactersSection(playerName) {
+    if (selectedSection === emptySection) {
+        return;
+    }
+
+    emptySection.querySelector('.selected-player-name').innerText = playerName;
+    scaleIn(emptySection);
+    scaleOut(selectedSection);
+    selectedSection = emptySection;
+}
+
+function showRightSection() {
+    if (selectedSection === rightSection) {
+        return;
+    }
+
+    scaleIn(rightSection);
+    scaleOut(selectedSection);
+    selectedSection = rightSection;
+}
+
 function createTableRow(item, number) {
     const row = document.createElement('tr');
     row.classList.add('characters-table-row');
@@ -78,6 +104,19 @@ function showTable() {
         { scale: 1, opacity: 1, duration: 0.5, ease: 'back.inOut(2)' });
 }
 
+function updateTable() {
+    $.ajax({
+        type: 'GET',
+        url: '/Admin/GetPlayerCharacters',
+        data: { playerId: selectedPlayerId },
+        success: (result) => {
+            fillTableData(result);
+            updateTableEventHandler();
+        },
+        error: (xhr, textStatus, errorThrown) => console.log(xhr.responseText)
+    });
+}
+
 function setSelectedPlayerName(name) {
     const title = document.querySelector('.players-page .right-section .title');
     const charNameElement = document.getElementById('selected-player-name');
@@ -107,25 +146,23 @@ playerItemElements.forEach((button) => {
         playerItemElements.forEach((b) => b.classList.remove('selected'));
         button.classList.add('selected');
 
-        const playerId = button.querySelector('.player-id').innerText;
-        const playerName = button.querySelector('.player-name').innerText;
+        selectedPlayerId = button.querySelector('.player-id').innerText;
+        selectedPlayerName = button.querySelector('.player-name').innerText;
         
         $.ajax({
             type: 'GET',
             url: '/Admin/GetPlayerCharacters',
-            data: { playerId: playerId },
+            data: { playerId: selectedPlayerId },
             success: (result) => {
-                fillTableData(result);
-                setSelectedPlayerName(playerName);
+                setSelectedPlayerName(selectedPlayerName);
 
-                if (!rightSection.style.display) {
-                    scaleIn(rightSection);
-                    scaleOut(infoSection);
-                }
-                
-                showTable();
+                showRightSection();
+
+                fillTableData(result);
                 updateTableEventHandler();
-            }
+                showTable();
+            },
+            error: (xhr, textStatus, errorThrown) => showEmptyCharactersSection(selectedPlayerName)
         })
     });
 });

@@ -19,7 +19,11 @@ function fillCharacterData(characterInfo) {
     const rating = document.querySelector('.rating-scores__value');
     const creationDate = document.querySelector('.creation-date__value');
 
-    if (characterInfo.status != 0)
+    
+    status.classList.remove('active');
+    status.classList.remove('blocked');
+    
+    if (characterInfo.status !== 0)
         status.classList.add('active');
     else
         status.classList.add('blocked');

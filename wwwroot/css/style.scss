@@ -16,6 +16,15 @@ $red: #f4364f;
 $green: #1ed068;
 $pinky: #F80086;
 
+@mixin unselectable {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Chrome, Edge, Opera and Firefox */
+}
+
 @mixin centered {
     position: fixed;
     top: 50%;
@@ -204,6 +213,7 @@ input[type="date"] {
     border-style: solid;
     border-color: $gray;
     line-height: 30px;
+    background: transparent;
 
     @include hover-up(-4px, 300ms);
 
@@ -219,6 +229,11 @@ input[type="date"] {
 
     &.without-hover-up {
         transform: unset;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        border-style: dashed;
     }
 }
 
@@ -325,10 +340,53 @@ button, .button {
     }
 }
 
+.gender-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &:focus {
+        outline: none;
+    }
+}
+
 .input-box {
     position: relative;
     display: flex;
     flex-direction: column;
+
+    &.tooltip {
+        .tooltip__text {
+            width: 275px;
+            right: 0;
+            margin: 0;
+            left: unset;
+            bottom: 7px;
+        }
+    }
+
+    &.upper-placeholder {
+        label {
+            position: absolute;
+            color: darkgray;
+            transition: transform 300ms ease;
+            transform-origin: left;
+            cursor: text;
+
+            &.lifted-up {
+                transform-origin: left;
+                transform: scale(0.8) translateY(-120%);
+            }
+        }
+
+        input {
+            transform: unset;
+
+            &::placeholder {
+                display: none;
+            }
+        }
+    }
 
     &.search {
         transition: transform 300ms ease;
@@ -592,6 +650,10 @@ button, .button {
             .info__text {
                 color: $dark-gray;
                 font-weight: 500;
+
+                & > * {
+                    margin-bottom: 10px;
+                }
             }
         }
 
@@ -698,14 +760,7 @@ button, .button {
                     row-gap: 35px;
 
                     .gender-selection {
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: space-between;
                         margin-top: 8px;
-
-                        &:focus {
-                            outline: none;
-                        }
 
                         input {
                             height: 25px;
@@ -952,6 +1007,12 @@ button, .button {
                                 text-align: left;
                             }
 
+                            td.status__value,
+                            th.status__header {
+                                text-align: center;
+                                padding-right: 10px;
+                            }
+
                             td.icon__value > img {
                                 height: 40px;
                                 margin-bottom: -4px;
@@ -1012,6 +1073,31 @@ button, .button {
                     position: absolute;
                     height: 100%;
                     right: 0;
+                }
+
+                .empty-characters-section {
+                    position: absolute;
+                    right: 0;
+                    display: none;
+                    width: calc(100% - #{$left-section-width});
+                    height: 100%;
+
+                    .middle-block {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0 40px 80px 40px;
+
+                        .empty-characters-section__icon {
+                            width: 80px;
+                            margin-bottom: 20px;
+                        }
+
+                        .empty-characters-section__text {
+                            font-size: 1.1em;
+                        }
+                    }
                 }
             }
 
@@ -1957,6 +2043,50 @@ button, .button {
 
         .right-section {
             display: none;
+
+            .middle-block.edit-user-form__wrapper {
+                height: calc(100% - 9%);
+                padding: 50px 100px;
+
+                form[name="edit-user-form"] {
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    .input-grid {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        height: 100%;
+                        padding: 10px 0 70px 0;
+
+                        .gender-selection {
+                            span {
+                                margin-right: 150px;
+                            }
+
+                            input {
+                                height: 25px;
+                            }
+                        }
+                    }
+
+                    .buttons {
+                        button {
+                            width: 200px;
+                        }
+
+                        & > button:nth-last-child(1) {
+                            float: right;
+                        }
+                    }
+                }
+            }
+
+            .footer {
+                height: 0;
+            }
         }
 
         .info {
@@ -2071,7 +2201,6 @@ button, .button {
 
 .tooltip {
     position: relative;
-    display: inline-block;
 
     &:hover .tooltip__text {
         opacity: 1;
@@ -2079,6 +2208,7 @@ button, .button {
     }
 
     .tooltip__text {
+        cursor: default;
         transition: all 200ms ease;
         font-size: 14px;
         font-weight: 500;
@@ -2095,6 +2225,8 @@ button, .button {
         bottom: 120%;
         left: 50%;
         margin-left: -50px;
+
+        @include unselectable();
     }
 }
 
@@ -2300,6 +2432,76 @@ button, .button {
 
             button {
                 width: 100%;
+            }
+        }
+    }
+}
+
+#character-ban-dialog-box {
+    .dialog-box {
+        width: 420px;
+
+        .dialog-box__content {
+            padding: 10px 0 20px 0;
+            width: 100%;
+
+            input {
+                width: 95%;
+                text-align: center;
+                margin-top: 10px;
+            }
+        }
+
+        .dialog-box__buttons {
+            button:active {
+                transform: scale(1.075);
+            }
+        }
+    }
+}
+
+#character-unban-dialog-box {
+    .dialog-box {
+        width: 420px;
+    }
+}
+
+#ban-result-dialog-box {
+    .dialog-box {
+        width: 420px;
+
+        .dialog-box__message > .ban-result {
+            &.banned::after {
+                content: "заблокирован";
+                color: $red;
+            }
+
+            &.unbanned::after {
+                content: "разблокирован";
+                color: $green;
+            }
+        }
+    }
+}
+
+#password-confirm-dialog-box {
+    .dialog-box {
+        width: 375px;
+
+        .dialog-box__content {
+            margin-bottom: 20px;
+
+            input {
+                margin-top: 10px;
+                width: 95%;
+                text-align: center;
+            }
+        }
+
+        .dialog-box__buttons {
+            button {
+                padding-right: initial;
+                padding-left: initial;
             }
         }
     }

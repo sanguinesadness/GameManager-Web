@@ -16,5 +16,5 @@ function getCurrentDate() {
     return today;
 }
 
-const datePicker = document.querySelector('.reg-form form[name="reg"] input[type="date"]');
+const datePicker = document.querySelector('input[type="date"]');
 datePicker.setAttribute('max', getCurrentDate());

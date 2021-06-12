@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using GameManager.Models;
 using GameManager.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace GameManager.Controllers
 {
@@ -11,11 +13,13 @@ namespace GameManager.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet]
@@ -110,6 +114,52 @@ namespace GameManager.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
+        }
+        
+        [HttpGet]
+        public IActionResult Account()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var user = _userManager.FindByIdAsync(userId).Result;
+            
+            return PartialView(user);
+        }
+
+        public async Task<IActionResult> EditUser(string id, string email, DateTime birthdate,
+                                            int genderId, string oldPassword, string newPassword)
+        {
+            User user = await _userManager.FindByIdAsync(id);
+            if (user is null)
+            {
+                return NotFound("Пользователь не найден.");
+            }
+
+            var passwordConfirmResult = _signInManager.CheckPasswordSignInAsync(user, oldPassword, false);
+
+            if (!passwordConfirmResult.Result.Succeeded)
+            {
+                return Problem("Неверный пароль.", statusCode: 400);
+            }
+            
+            user.Email = email;
+            user.BirthDate = birthdate;
+            user.GenderId = genderId;
+
+            var dataEditResult = _userManager.UpdateAsync(user);
+
+            if (!dataEditResult.Result.Succeeded)
+            {
+                return Problem("Неизвестная ошибка во время обновления данных пользователя.", statusCode: 500);
+            }
+            
+            var passwordEditResult = _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
+
+            if (!passwordConfirmResult.Result.Succeeded)
+            {
+                return Problem("Неизвестная ошибка во время обновления пароля пользователя.");
+            }
+
+            return Ok();
         }
     }
 }

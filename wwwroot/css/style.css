@@ -220,6 +220,7 @@ input[type="date"] {
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.5);
   line-height: 30px;
+  background: transparent;
   -webkit-transition: 300ms -webkit-transform;
   transition: 300ms -webkit-transform;
   transition: 300ms transform;
@@ -286,6 +287,14 @@ input[type="email"].without-hover-up,
 input[type="date"].without-hover-up {
   -webkit-transform: unset;
           transform: unset;
+}
+
+input[type="text"]:disabled,
+input[type="password"]:disabled,
+input[type="email"]:disabled,
+input[type="date"]:disabled {
+  opacity: 0.6;
+  border-style: dashed;
 }
 
 input[type="date"] {
@@ -423,6 +432,23 @@ button.without-hover-up:active, .button.without-hover-up:active {
           transform: scale(1.1);
 }
 
+.gender-selection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.gender-selection:focus {
+  outline: none;
+}
+
 .input-box {
   position: relative;
   display: -webkit-box;
@@ -432,6 +458,54 @@ button.without-hover-up:active, .button.without-hover-up:active {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+}
+
+.input-box.tooltip .tooltip__text {
+  width: 275px;
+  right: 0;
+  margin: 0;
+  left: unset;
+  bottom: 7px;
+}
+
+.input-box.upper-placeholder label {
+  position: absolute;
+  color: darkgray;
+  -webkit-transition: -webkit-transform 300ms ease;
+  transition: -webkit-transform 300ms ease;
+  transition: transform 300ms ease;
+  transition: transform 300ms ease, -webkit-transform 300ms ease;
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  cursor: text;
+}
+
+.input-box.upper-placeholder label.lifted-up {
+  -webkit-transform-origin: left;
+          transform-origin: left;
+  -webkit-transform: scale(0.8) translateY(-120%);
+          transform: scale(0.8) translateY(-120%);
+}
+
+.input-box.upper-placeholder input {
+  -webkit-transform: unset;
+          transform: unset;
+}
+
+.input-box.upper-placeholder input::-webkit-input-placeholder {
+  display: none;
+}
+
+.input-box.upper-placeholder input:-ms-input-placeholder {
+  display: none;
+}
+
+.input-box.upper-placeholder input::-ms-input-placeholder {
+  display: none;
+}
+
+.input-box.upper-placeholder input::placeholder {
+  display: none;
 }
 
 .input-box.search {
@@ -774,6 +848,10 @@ button.without-hover-up:active, .button.without-hover-up:active {
   font-weight: 500;
 }
 
+.content .info .middle-block .info__text > * {
+  margin-bottom: 10px;
+}
+
 .content .info .footer {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -943,21 +1021,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 .content .reg-form .reg-form__content form[name="reg"] .input-grid .gender-selection {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   margin-top: 8px;
-}
-
-.content .reg-form .reg-form__content form[name="reg"] .input-grid .gender-selection:focus {
-  outline: none;
 }
 
 .content .reg-form .reg-form__content form[name="reg"] .input-grid .gender-selection input {
@@ -1295,6 +1359,12 @@ button.without-hover-up:active, .button.without-hover-up:active {
   text-align: left;
 }
 
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table td.status__value,
+.content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table th.status__header {
+  text-align: center;
+  padding-right: 10px;
+}
+
 .content .admin-form .admin-form__content .players-page .right-section .characters-table__wrapper table#characters-table td.icon__value > img {
   height: 40px;
   margin-bottom: -4px;
@@ -1357,6 +1427,40 @@ button.without-hover-up:active, .button.without-hover-up:active {
   position: absolute;
   height: 100%;
   right: 0;
+}
+
+.content .admin-form .admin-form__content .players-page .empty-characters-section {
+  position: absolute;
+  right: 0;
+  display: none;
+  width: calc(100% - 375px);
+  height: 100%;
+}
+
+.content .admin-form .admin-form__content .players-page .empty-characters-section .middle-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 0 40px 80px 40px;
+}
+
+.content .admin-form .admin-form__content .players-page .empty-characters-section .middle-block .empty-characters-section__icon {
+  width: 80px;
+  margin-bottom: 20px;
+}
+
+.content .admin-form .admin-form__content .players-page .empty-characters-section .middle-block .empty-characters-section__text {
+  font-size: 1.1em;
 }
 
 .content .admin-form .admin-form__content .reports-page .left-section {
@@ -2568,6 +2672,60 @@ button.without-hover-up:active, .button.without-hover-up:active {
   display: none;
 }
 
+.content .account-page .right-section .middle-block.edit-user-form__wrapper {
+  height: calc(100% - 9%);
+  padding: 50px 100px;
+}
+
+.content .account-page .right-section .middle-block.edit-user-form__wrapper form[name="edit-user-form"] {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.content .account-page .right-section .middle-block.edit-user-form__wrapper form[name="edit-user-form"] .input-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+  padding: 10px 0 70px 0;
+}
+
+.content .account-page .right-section .middle-block.edit-user-form__wrapper form[name="edit-user-form"] .input-grid .gender-selection span {
+  margin-right: 150px;
+}
+
+.content .account-page .right-section .middle-block.edit-user-form__wrapper form[name="edit-user-form"] .input-grid .gender-selection input {
+  height: 25px;
+}
+
+.content .account-page .right-section .middle-block.edit-user-form__wrapper form[name="edit-user-form"] .buttons button {
+  width: 200px;
+}
+
+.content .account-page .right-section .middle-block.edit-user-form__wrapper form[name="edit-user-form"] .buttons > button:nth-last-child(1) {
+  float: right;
+}
+
+.content .account-page .right-section .footer {
+  height: 0;
+}
+
 .content .account-page .info {
   height: 100%;
   position: absolute;
@@ -2702,7 +2860,6 @@ button.without-hover-up:active, .button.without-hover-up:active {
 
 .tooltip {
   position: relative;
-  display: inline-block;
 }
 
 .tooltip:hover .tooltip__text {
@@ -2712,6 +2869,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 .tooltip .tooltip__text {
+  cursor: default;
   -webkit-transition: all 200ms ease;
   transition: all 200ms ease;
   font-size: 14px;
@@ -2730,6 +2888,17 @@ button.without-hover-up:active, .button.without-hover-up:active {
   bottom: 120%;
   left: 50%;
   margin-left: -50px;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Chrome, Edge, Opera and Firefox */
 }
 
 #no-character-dialog-box .dialog-box {
@@ -2968,6 +3137,63 @@ button.without-hover-up:active, .button.without-hover-up:active {
 
 #logout-confirm-dialog-box .dialog-box .dialog-box__buttons > form button {
   width: 100%;
+}
+
+#character-ban-dialog-box .dialog-box {
+  width: 420px;
+}
+
+#character-ban-dialog-box .dialog-box .dialog-box__content {
+  padding: 10px 0 20px 0;
+  width: 100%;
+}
+
+#character-ban-dialog-box .dialog-box .dialog-box__content input {
+  width: 95%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#character-ban-dialog-box .dialog-box .dialog-box__buttons button:active {
+  -webkit-transform: scale(1.075);
+          transform: scale(1.075);
+}
+
+#character-unban-dialog-box .dialog-box {
+  width: 420px;
+}
+
+#ban-result-dialog-box .dialog-box {
+  width: 420px;
+}
+
+#ban-result-dialog-box .dialog-box .dialog-box__message > .ban-result.banned::after {
+  content: "заблокирован";
+  color: #f4364f;
+}
+
+#ban-result-dialog-box .dialog-box .dialog-box__message > .ban-result.unbanned::after {
+  content: "разблокирован";
+  color: #1ed068;
+}
+
+#password-confirm-dialog-box .dialog-box {
+  width: 375px;
+}
+
+#password-confirm-dialog-box .dialog-box .dialog-box__content {
+  margin-bottom: 20px;
+}
+
+#password-confirm-dialog-box .dialog-box .dialog-box__content input {
+  margin-top: 10px;
+  width: 95%;
+  text-align: center;
+}
+
+#password-confirm-dialog-box .dialog-box .dialog-box__buttons button {
+  padding-right: initial;
+  padding-left: initial;
 }
 
 .context-menu {

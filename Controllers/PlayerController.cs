@@ -122,6 +122,11 @@ namespace GameManager.Controllers
             {
                 _db.Inventories.Remove(inv);
             }
+
+            foreach (var ban in _db.CharacterBans.Where(ban => ban.CharacterId == characterId))
+            {
+                _db.CharacterBans.Remove(ban);
+            }
             
             var result = _db.Characters.Remove(character);
             _db.SaveChanges();
@@ -210,7 +215,7 @@ namespace GameManager.Controllers
             }
 
             ViewBag.ItemCategories = await _db.ItemCategories.ToListAsync();
-            ViewBag.SelectedCharacter = _db.Characters.Find(_selectedCharacter.Id);
+            ViewBag.SelectedCharacter = await _db.Characters.FindAsync(_selectedCharacter.Id);
 
             return PartialView();
         }
@@ -292,12 +297,6 @@ namespace GameManager.Controllers
 
         [HttpGet]
         public IActionResult Settings()
-        {
-            return PartialView();
-        }
-
-        [HttpGet]
-        public IActionResult Account()
         {
             return PartialView();
         }

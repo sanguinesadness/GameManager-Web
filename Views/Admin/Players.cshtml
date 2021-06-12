@@ -41,26 +41,39 @@
         <div class="middle-block characters-table__wrapper">
             <table id="characters-table">
                 <thead>
-                    <th class="number__header">#</th>
-                    <th class="icon__header">Иконка</th>
-                    <th class="name__header">Имя</th>
-                    <th class="lvl__header">Уровень</th>
-                    <th class="gold__header">Золото</th>
-                    <th class="rating__header">Рейтинг</th>
-                    <th class="ban__header">Бан</th>
+                <th class="number__header">#</th>
+                <th class="icon__header">Иконка</th>
+                <th class="name__header">Имя</th>
+                <th class="lvl__header">Уровень</th>
+                <th class="gold__header">Золото</th>
+                <th class="rating__header">Рейтинг</th>
+                <th class="status__header">Бан</th>
                 </thead>
                 <tbody>
-                    @* filled in via script *@
+                @* filled in via script *@
                 </tbody>
             </table>
             <div id="characters-table-context-menu" class="context-menu">
                 <span class="context-menu-item block">Заблокировать</span>
                 <span class="context-menu-item unblock">Разблокировать</span>
+                <span class="context-menu-item edit enabled">Редактировать</span>
             </div>
         </div>
         <div class="footer">
             @* empty *@
         </div>
+    </section>
+    <section class="empty-characters-section">
+        <span class="title"></span>
+        <div class="middle-block">
+            <img class="empty-characters-section__icon" src="~/icons/svg/box.svg" alt=""/>
+            <span class="empty-characters-section__text">
+                У игрока
+                <b class="selected-player-name">username</b>
+                нет активных персонажей.
+            </span>
+        </div>
+        <div class="footer"></div>
     </section>
     <div class="info">
         <span class="title"></span>
@@ -77,6 +90,61 @@
     <div class="bottom-line"></div>
 </div>
 
+@* Hidden dialog box #1 *@
+<div id="character-ban-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title fault">Блокировка персонажа</h3>
+        <div class="dialog-box__content">
+            <span hidden class="character-ban-id"></span>
+            <span class="dialog-box__message">
+                Вы хотите заблокировать персонажа
+                <b class="selected-character-name">charname</b>
+                игрока
+                <b class="selected-player-name">username</b>.
+            </span>
+            <input class="character-ban-reason without-hover-up" type="text" placeholder="Причина блокировки"/>
+        </div>
+        <div class="dialog-box__buttons">
+            <button class="cancel accent without-hover-up">Отменить</button>
+            <button id="ban-character-button" class="accent without-hover-up">Подтвердить</button>
+        </div>
+    </div>
+</div>
+
+@* Hidden dialog box #2 *@
+<div id="character-unban-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title success">Снятие блокировки с персонажа</h3>
+        <p class="dialog-box__message">
+            Вы уверены, что хотите разблокировать персонажа 
+            <b class="selected-character-name">charname</b> 
+            игрока 
+            <b class="selected-player-name">username</b>?
+        </p>
+        <div class="dialog-box__buttons">
+            <button class="cancel accent without-hover-up">Нет</button>
+            <button id="unban-character-button" class="accent without-hover-up">Да</button>
+        </div>
+    </div>
+</div>
+
+@* Hidden dialog box #3 *@
+<div id="ban-result-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title success">Успешное действие</h3>
+        <p class="dialog-box__message">
+            Персонаж
+            <b class="selected-character-name">charname</b>
+            игрока
+            <b class="selected-player-name">username</b>
+            успешно
+            @* .banned or .unbanned *@
+            <b class="ban-result"></b>.
+        </p>
+        <button class="dialog-box__button close accent without-hover-up">Закрыть</button>
+    </div>
+</div>
+
 <script>
     document.getElementById('players-link').classList.add('selected');
 </script>
@@ -84,3 +152,4 @@
 <script src="~/js/Players/contextMenuHandler.js"></script>
 <script src="~/js/Players/playerSelector.js"></script>
 <script src="~/js/Players/playerSearch.js"></script>
+<script src="~/js/Players/dialogBoxHandler.js"></script>

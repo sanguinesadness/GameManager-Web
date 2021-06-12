@@ -1,5 +1,6 @@
 const rightSection = document.querySelector('.players-page > .right-section');
 const infoSection = document.querySelector('.players-page > .info');
+const emptySection = document.querySelector('.players-page > .empty-characters-section');
 
 const playerList = document.querySelector('.players-page .player-list');
 const emptyBlock = document.querySelector('.players-page .empty-players-block');
