@@ -478,6 +478,17 @@ button.without-hover-up:active, .button.without-hover-up:active {
   -webkit-transform-origin: left;
           transform-origin: left;
   cursor: text;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Chrome, Edge, Opera and Firefox */
 }
 
 .input-box.upper-placeholder label.lifted-up {
@@ -565,6 +576,11 @@ button.without-hover-up:active, .button.without-hover-up:active {
           transform: translateY(32px);
 }
 
+.input-box:hover .error-label.without-hover-up {
+  -webkit-transform: translateY(45px);
+          transform: translateY(45px);
+}
+
 .input-box .error-label {
   cursor: default;
   position: absolute;
@@ -592,11 +608,23 @@ button.without-hover-up:active, .button.without-hover-up:active {
   -webkit-transition: 250ms all;
   transition: 250ms all;
   opacity: 0;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Chrome, Edge, Opera and Firefox */
 }
 
 .input-box .error-label .icon {
   background: url(../icons/svg/error.svg);
   background-size: contain;
+  background-repeat: no-repeat;
   height: 15px;
   width: 15px;
   margin-right: 5px;
@@ -643,6 +671,10 @@ button.without-hover-up:active, .button.without-hover-up:active {
   text-align: center;
   line-height: 22px;
   overflow: hidden;
+}
+
+.dialog-wrapper .dialog-box input {
+  font-size: 0.9em;
 }
 
 .dialog-wrapper .dialog-box .dialog-box__title {
@@ -694,26 +726,36 @@ button.without-hover-up:active, .button.without-hover-up:active {
   background: linear-gradient(111.34deg, #18278D 0%, #7D1F94 100%);
 }
 
-.bg .blick-1 {
+.bg .bubble {
   z-index: 1;
   position: absolute;
-  width: 495px;
-  height: 555px;
-  left: 72px;
-  top: 276px;
-  -webkit-animation: color-party 5s linear infinite;
-          animation: color-party 5s linear infinite;
+  background: linear-gradient(164.87deg, rgba(255, 255, 255, 0.24) 12.52%, rgba(255, 255, 255, 0.06) 89.36%);
+  border-radius: 50%;
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+  -webkit-transition: 500ms -webkit-transform;
+  transition: 500ms -webkit-transform;
+  transition: 500ms transform;
+  transition: 500ms transform, 500ms -webkit-transform;
 }
 
-.bg .blick-2 {
-  z-index: 1;
-  position: absolute;
-  width: 571px;
-  height: 700px;
-  left: 853px;
-  top: 66px;
-  -webkit-animation: color-party 5s linear infinite;
-          animation: color-party 5s linear infinite;
+.bg .bubble:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.bg .bubble.first {
+  width: 500px;
+  height: 500px;
+  left: 200px;
+  top: 50px;
+}
+
+.bg .bubble.second {
+  width: 400px;
+  height: 400px;
+  right: 250px;
+  top: 300px;
 }
 
 .bg .shape-simple {
@@ -1325,6 +1367,14 @@ button.without-hover-up:active, .button.without-hover-up:active {
   display: -ms-flexbox;
   display: flex;
   margin-right: 10px;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .footer {
+  padding: 0 30px;
+}
+
+.content .admin-form .admin-form__content .players-page .left-section .footer .input-box {
+  width: 100%;
 }
 
 .content .admin-form .admin-form__content .players-page .right-section {
@@ -3139,6 +3189,11 @@ button.without-hover-up:active, .button.without-hover-up:active {
   width: 100%;
 }
 
+#successful-changes-dialog-box .dialog-box,
+#no-changes-dialog-box .dialog-box {
+  width: 280px;
+}
+
 #character-ban-dialog-box .dialog-box {
   width: 420px;
 }
@@ -3178,7 +3233,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 #password-confirm-dialog-box .dialog-box {
-  width: 375px;
+  width: 420px;
 }
 
 #password-confirm-dialog-box .dialog-box .dialog-box__content {

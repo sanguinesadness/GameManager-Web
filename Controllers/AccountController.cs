@@ -124,39 +124,47 @@ namespace GameManager.Controllers
             
             return PartialView(user);
         }
-
-        public async Task<IActionResult> EditUser(string id, string email, DateTime birthdate,
-                                            int genderId, string oldPassword, string newPassword)
+        
+        [HttpPut]
+        public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel)
         {
-            User user = await _userManager.FindByIdAsync(id);
+            User user = await _userManager.FindByIdAsync(editUserViewModel.Id);
             if (user is null)
             {
                 return NotFound("Пользователь не найден.");
             }
 
-            var passwordConfirmResult = _signInManager.CheckPasswordSignInAsync(user, oldPassword, false);
+            if (string.IsNullOrEmpty(editUserViewModel.OldPassword))
+            {
+                return Problem("Значение пароля не может быть пустым.");
+            }
+
+            var passwordConfirmResult = _signInManager.CheckPasswordSignInAsync(user, editUserViewModel.OldPassword, false);
 
             if (!passwordConfirmResult.Result.Succeeded)
             {
                 return Problem("Неверный пароль.", statusCode: 400);
             }
             
-            user.Email = email;
-            user.BirthDate = birthdate;
-            user.GenderId = genderId;
+            user.Email = editUserViewModel.Email;
+            user.BirthDate = editUserViewModel.Birthdate;
+            user.GenderId = editUserViewModel.GenderId;
 
             var dataEditResult = _userManager.UpdateAsync(user);
 
             if (!dataEditResult.Result.Succeeded)
             {
-                return Problem("Неизвестная ошибка во время обновления данных пользователя.", statusCode: 500);
+                return Problem("Неверные данные пользователя.", statusCode: 500);
             }
             
-            var passwordEditResult = _userManager.ChangePasswordAsync(user, oldPassword, newPassword);
-
-            if (!passwordConfirmResult.Result.Succeeded)
+            if (!string.IsNullOrEmpty(editUserViewModel.NewPassword))
             {
-                return Problem("Неизвестная ошибка во время обновления пароля пользователя.");
+                var passwordEditResult = _userManager.ChangePasswordAsync(user, editUserViewModel.OldPassword, editUserViewModel.NewPassword);
+
+                if (!passwordEditResult.Result.Succeeded)
+                {
+                    return Problem("Неизвестная ошибка во время обновления пароля пользователя.");
+                }
             }
 
             return Ok();

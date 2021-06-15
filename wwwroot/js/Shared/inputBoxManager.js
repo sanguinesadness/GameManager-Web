@@ -1,6 +1,28 @@
 const upperPlaceholders = document.querySelectorAll('.input-box.upper-placeholder');
 const errorLabels = document.querySelectorAll('.error-label');
 
+function showInputBoxError(inputBox, errorText) {
+    const errorLabel = inputBox.querySelector('.error-label');
+    const text = errorLabel.querySelector('.text');
+    const input = inputBox.querySelector('input');
+
+    text.innerText = errorText;
+    errorLabel.style.display = "flex";
+
+    input.classList.add('input-validation-error');
+}
+
+function hideInputBoxError(inputBox) {
+    const errorLabel = inputBox.querySelector('.error-label');
+    const text = errorLabel.querySelector('.text');
+    const input = inputBox.querySelector('input');
+
+    text.innerText = "";
+    errorLabel.style.display = "none";
+
+    input.classList.remove('input-validation-error');
+}
+
 errorLabels.forEach((label) => {
     const text = label.querySelector('.text');
 

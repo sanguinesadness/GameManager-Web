@@ -11,6 +11,8 @@ editAction.addEventListener('click', (event) => {
         return;
     }
 
+    setInitialUserData();
+
     scaleIn(rightSection);
     scaleOut(infoSection);
 });

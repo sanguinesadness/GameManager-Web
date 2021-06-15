@@ -1,6 +1,14 @@
 ﻿const rightSection = document.querySelector('.account-page > .right-section');
 const infoSection = document.querySelector('.account-page > .info');
 
+const id = document.getElementById('id');
+const userName = document.getElementById('username');
+const email = document.getElementById('email');
+const birthDate = document.getElementById('birthdate');
+const gender = document.getElementById('gender-result');
+const oldPassword = document.getElementById('old-password');
+const newPassword = document.getElementById('new-password');
+
 function scaleIn(element, isFlex = false) {
     if (isFlex)
         element.style.display = "flex";

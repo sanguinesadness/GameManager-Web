@@ -30,10 +30,12 @@ function addGameSectionsClickEvent() {
             sections.forEach((section) => section.classList.remove('selected'));
             section.classList.add('selected');
 
-            selectedSectionName.innerText = section.querySelector('span').innerText;
-            gsap.fromTo(selectedSectionName,
-                { scale: 0, opacity: 0 },
-                { scale: 1, opacity: 1, duration: 0.5, ease: 'back.inOut(2)' });
+            if (selectedSectionName.innerText !== section.querySelector('span').innerText) {
+                selectedSectionName.innerText = section.querySelector('span').innerText;
+                gsap.fromTo(selectedSectionName,
+                    { scale: 0, opacity: 0 },
+                    { scale: 1, opacity: 1, duration: 0.5, ease: 'back.inOut(2)' });
+            }
         });
     })
 }

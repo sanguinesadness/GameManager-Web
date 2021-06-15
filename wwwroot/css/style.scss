@@ -41,6 +41,14 @@ $pinky: #F80086;
     }
 }
 
+@mixin bubble() {
+    background: linear-gradient(164.87deg, rgba(255, 255, 255, 0.24) 12.52%, rgba(255, 255, 255, 0.06) 89.36%);
+    border-radius: 50%;
+    filter: blur(1px);
+
+    @include hover-scale(1.05, 500ms);
+}
+
 @mixin text-ellipsis() {
     text-overflow: ellipsis;
     overflow: hidden;
@@ -373,6 +381,8 @@ button, .button {
             transform-origin: left;
             cursor: text;
 
+            @include unselectable();
+
             &.lifted-up {
                 transform-origin: left;
                 transform: scale(0.8) translateY(-120%);
@@ -425,6 +435,10 @@ button, .button {
     &:hover .error-label {
         opacity: 1;
         transform: translateY(32px);
+
+        &.without-hover-up {
+            transform: translateY(45px);
+        }
     }
 
     .error-label {
@@ -447,9 +461,12 @@ button, .button {
         transition: 250ms all;
         opacity: 0;
 
+        @include unselectable();
+
         .icon {
             background: url(../icons/svg/error.svg);
             background-size: contain;
+            background-repeat: no-repeat;
             height: 15px;
             width: 15px;
             margin-right: 5px;
@@ -480,6 +497,10 @@ button, .button {
         text-align: center;
         line-height: 22px;
         overflow: hidden;
+
+        input {
+            font-size: 0.9em;
+        }
 
         .dialog-box__title {
             margin-bottom: 10px;
@@ -524,30 +545,27 @@ button, .button {
     width: 100vw;
     background: linear-gradient(111.34deg, #18278D 0%, #7D1F94 100%);
 
-    .blick-1 {
+    .bubble {
         z-index: 1;
         position: absolute;
-        width: 495px;
-        height: 555px;
-        left: 72px;
-        top: 276px;
+        @include bubble();
 
-        animation: color-party 5s linear infinite;
-        //filter: blur(400px);
-    }
-
-    .blick-2 {
-        z-index: 1;
-        position: absolute;
-        width: 571px;
-        height: 700px;
-        left: 853px;
-        top: 66px;
-
-        animation: color-party 5s linear infinite;
-        //filter: blur(400px);
-    }
+        &.first {
+            width: 500px;
+            height: 500px;
+            left: 200px;
+            top: 50px;
+        }
     
+        &.second {
+            width: 400px;
+            height: 400px;
+            right: 250px;
+            top: 300px;
+        }
+    }
+
+    // * not used
     .shape-simple {
         z-index: 1;
         position: absolute;
@@ -567,6 +585,7 @@ button, .button {
         @include hover-scale(1.06, 500ms);
     }
 
+    // * not used
     .spin-container {
         z-index: 3;
         top: 10vh;
@@ -974,6 +993,14 @@ button, .button {
                                     margin-right: 10px;
                                 }
                             }
+                        }
+                    }
+
+                    .footer {
+                        padding: 0 30px;
+
+                        .input-box {
+                            width: 100%;
                         }
                     }
                 }
@@ -2236,7 +2263,7 @@ button, .button {
     }
 }
 
-#successful-purchase-dialog-box{
+#successful-purchase-dialog-box {
     .dialog-box {
         width: 300px;
     }
@@ -2437,6 +2464,13 @@ button, .button {
     }
 }
 
+#successful-changes-dialog-box,
+#no-changes-dialog-box {
+    .dialog-box {
+        width: 280px;
+    }
+}
+
 #character-ban-dialog-box {
     .dialog-box {
         width: 420px;
@@ -2486,7 +2520,7 @@ button, .button {
 
 #password-confirm-dialog-box {
     .dialog-box {
-        width: 375px;
+        width: 420px;
 
         .dialog-box__content {
             margin-bottom: 20px;

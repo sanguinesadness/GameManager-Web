@@ -7,11 +7,11 @@ let selectedPlayerName;
 let selectedSection = infoSection;
 
 function showEmptyCharactersSection(playerName) {
+    emptySection.querySelector('.selected-player-name').innerText = playerName;
     if (selectedSection === emptySection) {
         return;
     }
 
-    emptySection.querySelector('.selected-player-name').innerText = playerName;
     scaleIn(emptySection);
     scaleOut(selectedSection);
     selectedSection = emptySection;

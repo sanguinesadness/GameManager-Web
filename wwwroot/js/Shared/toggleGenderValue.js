@@ -5,7 +5,7 @@ const genderRadioButtons = genderSelection.querySelectorAll('input[name="genderR
 // отслеживание изменений радио-кнопок
 for (let i = 0; i < genderRadioButtons.length; i++) {
     genderRadioButtons[i].addEventListener('change', (e) => {
-        genderResult.setAttribute('value', e.target.getAttribute('genderId'));
+        genderResult.value = e.target.getAttribute('genderId');
     });
 }
 
@@ -18,11 +18,10 @@ if (genderResult.classList.contains('input-validation-error')) {
     genderTitle.style.fontWeight = 500;
 }
 
-// todo error
 function checkGenderResult() {
     genderRadioButtons.forEach((radioButton) => {
         if (radioButton.getAttribute('genderId') === genderResult.value) {
-            radioButton.setAttribute('checked', 'true');
+            radioButton.checked = true;
         }
     });
 }
