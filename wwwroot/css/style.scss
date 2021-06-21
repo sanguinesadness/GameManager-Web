@@ -14,6 +14,7 @@ $middle: #673AB7;
 $light: #E4D6FF;
 $red: #f4364f;
 $green: #1ed068;
+$grass: #1fbe62;
 $pinky: #F80086;
 
 @mixin unselectable {
@@ -223,25 +224,32 @@ input[type="date"] {
     line-height: 30px;
     background: transparent;
 
-    @include hover-up(-4px, 300ms);
-
     &.input-validation-error {
         border-color: rgba($color: $red, $alpha: 0.7);
 
         &::placeholder {
             color: $red !important;
             opacity: 0.8;
-            font-weight: 500;
         }
-    }
-
-    &.without-hover-up {
-        transform: unset;
     }
 
     &:disabled {
         opacity: 0.6;
         border-style: dashed;
+    }
+}
+
+input[type="password"] {
+    &.no-indicators {
+        &::-webkit-credentials-auto-fill-button,
+        &::-webkit-caps-lock-indicator {
+            visibility: hidden;
+            display: none !important;
+            pointer-events: none;
+            position: absolute;
+            right: 0;  
+            opacity: 0;
+        }
     }
 }
 
@@ -434,7 +442,7 @@ button, .button {
 
     &:hover .error-label {
         opacity: 1;
-        transform: translateY(32px);
+        transform: translateY(37px);
 
         &.without-hover-up {
             transform: translateY(45px);
@@ -442,6 +450,7 @@ button, .button {
     }
 
     .error-label {
+        visibility: hidden;
         cursor: default;
         position: absolute;
         font-size: 14px;
@@ -449,10 +458,11 @@ button, .button {
         padding: 10px 20px;
         background: white;
         border-radius: 10px;
-        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+        box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
         max-width: 100%;
-        z-index: 10;
+        z-index: 15;
         align-self: center;
+        pointer-events: none;
 
         display: flex;
         flex-direction: row;
@@ -469,7 +479,9 @@ button, .button {
             background-repeat: no-repeat;
             height: 15px;
             width: 15px;
-            margin-right: 5px;
+            min-height: 15px;
+            min-width: 15px;
+            margin-right: 7px;
         }
     }
 }
@@ -2103,7 +2115,7 @@ button, .button {
                         button {
                             width: 200px;
                         }
-
+    
                         & > button:nth-last-child(1) {
                             float: right;
                         }
@@ -2464,10 +2476,21 @@ button, .button {
     }
 }
 
-#successful-changes-dialog-box,
-#no-changes-dialog-box {
+#successful-changes-dialog-box {
     .dialog-box {
         width: 280px;
+    }
+}
+
+#failed-changes-dialog-box {
+    .dialog-box {
+        width: 340px;
+    }
+}
+
+#no-changes-dialog-box {
+    .dialog-box {
+        width: 320px;
     }
 }
 
@@ -2520,15 +2543,19 @@ button, .button {
 
 #password-confirm-dialog-box {
     .dialog-box {
-        width: 420px;
+        width: 390px;
 
         .dialog-box__content {
             margin-bottom: 20px;
 
-            input {
-                margin-top: 10px;
-                width: 95%;
-                text-align: center;
+            .input-box {
+                align-items: center;
+
+                input {
+                    margin-top: 10px;
+                    width: 95%;
+                    text-align: center;
+                }
             }
         }
 

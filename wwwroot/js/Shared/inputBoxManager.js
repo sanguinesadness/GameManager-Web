@@ -1,37 +1,47 @@
 const upperPlaceholders = document.querySelectorAll('.input-box.upper-placeholder');
 const errorLabels = document.querySelectorAll('.error-label');
 
-function showInputBoxError(inputBox, errorText) {
+function showInputBoxError(inputBox, errorMsg) {
     const errorLabel = inputBox.querySelector('.error-label');
-    const text = errorLabel.querySelector('.text');
+    const errorText = errorLabel.querySelector('.text');
     const input = inputBox.querySelector('input');
+    
+    errorText.innerHTML = errorMsg;
 
-    text.innerText = errorText;
-    errorLabel.style.display = "flex";
-
+    errorText.classList.add('field-validation-error');
+    errorText.classList.remove('field-validation-valid');
     input.classList.add('input-validation-error');
+    input.classList.remove('valid');
 }
 
-function hideInputBoxError(inputBox) {
+function refreshInputBox(inputBox) {
     const errorLabel = inputBox.querySelector('.error-label');
-    const text = errorLabel.querySelector('.text');
     const input = inputBox.querySelector('input');
+    
+    if (errorLabel) {
+        const errorText = errorLabel.querySelector('.text');
 
-    text.innerText = "";
-    errorLabel.style.display = "none";
+        errorText.innerHTML = "";
 
+        errorText.classList.remove('field-validation-error');
+        errorText.classList.remove('field-validation-valid');
+    }
+    
     input.classList.remove('input-validation-error');
+    input.classList.remove('valid');
 }
 
 errorLabels.forEach((label) => {
-    const text = label.querySelector('.text');
+    const errorText = label.querySelector('.text');
 
-    if (!text.innerText) {
-        label.style.display = 'none';
-    }
-    else {
-        label.style.display = 'flex';
-    }
+    $('body').on('DOMSubtreeModified', errorText, () => {
+        if (errorText.classList.contains('field-validation-error')) {
+            label.style.visibility = "visible";
+        }
+        else if (errorText.classList.contains('field-validation-valid')) {
+            label.style.visibility = "hidden";
+        }
+    });
 });
 
 upperPlaceholders.forEach((inputBox) => {

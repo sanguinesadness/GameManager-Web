@@ -1,6 +1,8 @@
 const content = document.querySelector('.content');
 const dialogWrappers = document.querySelectorAll('.dialog-wrapper');
 
+let activeDialog;
+
 function openDialogWrapper(wrapper) {
     gsap.fromTo(wrapper,
         { opacity: 0 },
@@ -31,6 +33,8 @@ function showDialog(dialogWrapper) {
 
     openDialogBox(dialogBox);
     openDialogWrapper(dialogWrapper);
+    
+    activeDialog = dialogWrapper;
 }
 
 function closeDialog(dialogWrapper) {
@@ -38,6 +42,8 @@ function closeDialog(dialogWrapper) {
 
     closeDialogBox(dialogBox);
     closeDialogWrapper(dialogWrapper);
+    
+    activeDialog = null;
 }
 
 // initial initializations
@@ -51,7 +57,13 @@ dialogWrappers.forEach((wrapper) => {
 
     // закрытие диалогового окна
     closeButton.addEventListener('click', () => {
-        closeDialogBox(dialogBox);
-        closeDialogWrapper(wrapper);
+        closeDialog(wrapper);
     });
+});
+
+// close active dialog if Enter is pressed
+document.addEventListener('keyup', (event) => {
+   if (activeDialog && event.code === "Enter") {
+       closeDialog(activeDialog);
+   } 
 });

@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using GameManager.Models;
 using GameManager.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GameManager.Controllers
 {
@@ -14,6 +18,17 @@ namespace GameManager.Controllers
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        
+        private User CurrentUser
+        {
+            get
+            {
+                var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                var user = _userManager.FindByIdAsync(userId).Result;
+
+                return user;
+            }
+        }
 
         public AccountController(UserManager<User> userManager, SignInManager<User> signInManager, IHttpContextAccessor httpContextAccessor)
         {
@@ -119,55 +134,123 @@ namespace GameManager.Controllers
         [HttpGet]
         public IActionResult Account()
         {
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var user = _userManager.FindByIdAsync(userId).Result;
+            var user = CurrentUser;
+            var model = new EditUserViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                BirthDate = user.BirthDate,
+                GenderId = user.GenderId
+            };
             
-            return PartialView(user);
+            return PartialView(model);
+        }
+
+        [HttpGet]
+        public IActionResult GetCurrentUserData()
+        {
+            var user = CurrentUser;
+            var model = new EditUserViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Email = user.Email,
+                BirthDate = user.BirthDate,
+                GenderId = user.GenderId
+            };
+
+            return Ok(model);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult VerifyCurrentPassword(string oldPassword)
+        {
+            var passwordConfirmResult = _signInManager.CheckPasswordSignInAsync(CurrentUser, oldPassword, false).Result;
+            if (!passwordConfirmResult.Succeeded)
+            {
+                return Json("Пароли не совпадают.");
+            }
+
+            return Json(true);
         }
         
         [HttpPut]
-        public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel)
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
         {
-            User user = await _userManager.FindByIdAsync(editUserViewModel.Id);
+            User user = await _userManager.FindByIdAsync(model.Id);
             if (user is null)
             {
                 return NotFound("Пользователь не найден.");
             }
-
-            if (string.IsNullOrEmpty(editUserViewModel.OldPassword))
-            {
-                return Problem("Значение пароля не может быть пустым.");
-            }
-
-            var passwordConfirmResult = _signInManager.CheckPasswordSignInAsync(user, editUserViewModel.OldPassword, false);
-
-            if (!passwordConfirmResult.Result.Succeeded)
-            {
-                return Problem("Неверный пароль.", statusCode: 400);
-            }
             
-            user.Email = editUserViewModel.Email;
-            user.BirthDate = editUserViewModel.Birthdate;
-            user.GenderId = editUserViewModel.GenderId;
-
-            var dataEditResult = _userManager.UpdateAsync(user);
-
-            if (!dataEditResult.Result.Succeeded)
+            var passwordConfirmResult = _signInManager.CheckPasswordSignInAsync(user, model.OldPassword, false).Result;
+            if (!passwordConfirmResult.Succeeded)
             {
-                return Problem("Неверные данные пользователя.", statusCode: 500);
+                return Problem("Введен неверный пароль Повторите попытку.");
             }
-            
-            if (!string.IsNullOrEmpty(editUserViewModel.NewPassword))
-            {
-                var passwordEditResult = _userManager.ChangePasswordAsync(user, editUserViewModel.OldPassword, editUserViewModel.NewPassword);
 
-                if (!passwordEditResult.Result.Succeeded)
+            user.Email = model.Email;
+            user.BirthDate = model.BirthDate;
+            user.GenderId = model.GenderId;
+
+            var dataEditResult = _userManager.UpdateAsync(user).Result;
+            if (!dataEditResult.Succeeded)
+            {
+                return Problem("Введены неверные данные.");
+            }
+
+            if (!string.IsNullOrEmpty(model.NewPassword))
+            {
+                var passwordEditResult = _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword).Result;
+                if (!passwordEditResult.Succeeded)
                 {
-                    return Problem("Неизвестная ошибка во время обновления пароля пользователя.");
+                    return Problem("Неизвестная ошибка при смене пароля.");
                 }
             }
-
+            
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult VerifyEmail(string email)
+        {
+            string normalizedEmail = _userManager.NormalizeEmail(email);
+            var user = _userManager.Users.FirstOrDefault(u => u.NormalizedEmail == normalizedEmail);
+            
+            if (user != null)
+            {
+                return Json("Данный адрес уже используется.");
+            }
+
+            return Json(true);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult VerifyUsername(string username)
+        {
+            Regex regex = new Regex("^[a-zA-Z0-9]+$");
+
+            string normalizedUsername = _userManager.NormalizeName(username);
+            var user = _userManager.Users.FirstOrDefault(u => u.NormalizedUserName == normalizedUsername);
+            
+            if (username.Length < 3 || username.Length > 30)
+            {
+                return Json("Введите от 3 до 30 символов.");
+            }
+            else if (!regex.IsMatch(username))
+            {
+                return Json("Разрешены только цифры и символы латинского алфавита.");
+            }
+            else if (user != null)
+            {
+                return Json("Данное имя уже используется.");
+            }
+
+            return Json(true);
         }
     }
 }

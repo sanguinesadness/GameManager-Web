@@ -221,21 +221,6 @@ input[type="date"] {
   border-color: rgba(0, 0, 0, 0.5);
   line-height: 30px;
   background: transparent;
-  -webkit-transition: 300ms -webkit-transform;
-  transition: 300ms -webkit-transform;
-  transition: 300ms transform;
-  transition: 300ms transform, 300ms -webkit-transform;
-}
-
-input[type="text"]:hover, input[type="text"]:focus,
-input[type="password"]:hover,
-input[type="password"]:focus,
-input[type="email"]:hover,
-input[type="email"]:focus,
-input[type="date"]:hover,
-input[type="date"]:focus {
-  -webkit-transform: translateY(-4px);
-          transform: translateY(-4px);
 }
 
 input[type="text"].input-validation-error,
@@ -251,7 +236,6 @@ input[type="email"].input-validation-error::-webkit-input-placeholder,
 input[type="date"].input-validation-error::-webkit-input-placeholder {
   color: #f4364f !important;
   opacity: 0.8;
-  font-weight: 500;
 }
 
 input[type="text"].input-validation-error:-ms-input-placeholder,
@@ -260,7 +244,6 @@ input[type="email"].input-validation-error:-ms-input-placeholder,
 input[type="date"].input-validation-error:-ms-input-placeholder {
   color: #f4364f !important;
   opacity: 0.8;
-  font-weight: 500;
 }
 
 input[type="text"].input-validation-error::-ms-input-placeholder,
@@ -269,7 +252,6 @@ input[type="email"].input-validation-error::-ms-input-placeholder,
 input[type="date"].input-validation-error::-ms-input-placeholder {
   color: #f4364f !important;
   opacity: 0.8;
-  font-weight: 500;
 }
 
 input[type="text"].input-validation-error::placeholder,
@@ -278,15 +260,6 @@ input[type="email"].input-validation-error::placeholder,
 input[type="date"].input-validation-error::placeholder {
   color: #f4364f !important;
   opacity: 0.8;
-  font-weight: 500;
-}
-
-input[type="text"].without-hover-up,
-input[type="password"].without-hover-up,
-input[type="email"].without-hover-up,
-input[type="date"].without-hover-up {
-  -webkit-transform: unset;
-          transform: unset;
 }
 
 input[type="text"]:disabled,
@@ -295,6 +268,15 @@ input[type="email"]:disabled,
 input[type="date"]:disabled {
   opacity: 0.6;
   border-style: dashed;
+}
+
+input[type="password"].no-indicators::-webkit-credentials-auto-fill-button, input[type="password"].no-indicators::-webkit-caps-lock-indicator {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  opacity: 0;
 }
 
 input[type="date"] {
@@ -572,8 +554,8 @@ button.without-hover-up:active, .button.without-hover-up:active {
 
 .input-box:hover .error-label {
   opacity: 1;
-  -webkit-transform: translateY(32px);
-          transform: translateY(32px);
+  -webkit-transform: translateY(37px);
+          transform: translateY(37px);
 }
 
 .input-box:hover .error-label.without-hover-up {
@@ -582,6 +564,7 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 .input-box .error-label {
+  visibility: hidden;
   cursor: default;
   position: absolute;
   font-size: 14px;
@@ -589,12 +572,13 @@ button.without-hover-up:active, .button.without-hover-up:active {
   padding: 10px 20px;
   background: white;
   border-radius: 10px;
-  -webkit-box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
-          box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
+          box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.3);
   max-width: 100%;
-  z-index: 10;
+  z-index: 15;
   -ms-flex-item-align: center;
       align-self: center;
+  pointer-events: none;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -627,7 +611,9 @@ button.without-hover-up:active, .button.without-hover-up:active {
   background-repeat: no-repeat;
   height: 15px;
   width: 15px;
-  margin-right: 5px;
+  min-height: 15px;
+  min-width: 15px;
+  margin-right: 7px;
 }
 
 .dialog-wrapper {
@@ -3189,9 +3175,16 @@ button.without-hover-up:active, .button.without-hover-up:active {
   width: 100%;
 }
 
-#successful-changes-dialog-box .dialog-box,
-#no-changes-dialog-box .dialog-box {
+#successful-changes-dialog-box .dialog-box {
   width: 280px;
+}
+
+#failed-changes-dialog-box .dialog-box {
+  width: 340px;
+}
+
+#no-changes-dialog-box .dialog-box {
+  width: 320px;
 }
 
 #character-ban-dialog-box .dialog-box {
@@ -3233,17 +3226,27 @@ button.without-hover-up:active, .button.without-hover-up:active {
 }
 
 #password-confirm-dialog-box .dialog-box {
-  width: 420px;
+  width: 390px;
 }
 
 #password-confirm-dialog-box .dialog-box .dialog-box__content {
   margin-bottom: 20px;
 }
 
-#password-confirm-dialog-box .dialog-box .dialog-box__content input {
+#password-confirm-dialog-box .dialog-box .dialog-box__content .input-box {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#password-confirm-dialog-box .dialog-box .dialog-box__content .input-box input {
   margin-top: 10px;
   width: 95%;
   text-align: center;
+}
+
+#password-confirm-dialog-box .dialog-box .dialog-box__content .input-box input.valid {
+  border-color: rgba(31, 190, 98, 0.7);
 }
 
 #password-confirm-dialog-box .dialog-box .dialog-box__buttons button {

@@ -24,10 +24,13 @@
                 <h1 class="gms-label">gms.</h1>
             </div>
         </div>
-
+    
         <script src="~/js/Shared/dialogBoxManager.js" asp-append-version="true"></script>
         <script src="~/js/Shared/inputBoxManager.js" asp-append-version="true"></script>
-        @RenderSection("Scripts", required: false)
+    
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/js/Shared/custom.validation.messages.js"></script>
     </body>
 </html>
 

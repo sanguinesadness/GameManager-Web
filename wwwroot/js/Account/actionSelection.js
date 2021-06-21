@@ -10,8 +10,8 @@ editAction.addEventListener('click', (event) => {
         event.preventDefault();
         return;
     }
-
-    setInitialUserData();
+    
+    requestUserInfo();
 
     scaleIn(rightSection);
     scaleOut(infoSection);

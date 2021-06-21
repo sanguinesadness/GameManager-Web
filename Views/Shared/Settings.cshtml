@@ -1,9 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Settings";
     if (User.IsInRole("Player"))
-        Layout = "_PlayerLayout";
+        Layout = "../Player/_PlayerLayout";
     if (User.IsInRole("Admin"))
-        Layout = "_AdminLayout";
+        Layout = "../Admin/_AdminLayout";
 }
 
 <div class="settings-page">

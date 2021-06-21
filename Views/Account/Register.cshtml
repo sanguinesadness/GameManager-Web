@@ -48,10 +48,10 @@
                 <div class="input-box">
                     <div class="gender-selection" tabindex="6">
                         <span>Пол:</span>
-                        <input type="radio" name="genderRadioButton" id="gender-male" value="Муж" genderId="1">
+                        <input checked type="radio" name="genderRadioButton" id="gender-male" value="Муж" genderId="1">
                         <input type="radio" name="genderRadioButton" id="gender-female" value="Жен" genderId="2">
                         <input type="radio" name="genderRadioButton" id="gender-other" value="Другое" genderId="3">
-                        <input hidden asp-for="Gender" id="gender-result" />
+                        <input hidden asp-for="Gender" id="gender-result" value="1" />
                     </div>
                     <span class="error-label">
                         <span class="icon"></span>

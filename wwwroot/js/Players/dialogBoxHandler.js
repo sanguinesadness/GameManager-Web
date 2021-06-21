@@ -23,11 +23,11 @@ function showUnbanDialogBox() {
     showDialog(banResultDialogBox);
 }
 
-banCharacterButton.addEventListener('click', () => {
+function banCharacter() {
     $.ajax({
         type: 'POST',
         url: '/Admin/BanCharacter',
-        data: { 
+        data: {
             characterId: selectedCharacterId,
             reason: banReasonInput.value
         },
@@ -38,6 +38,16 @@ banCharacterButton.addEventListener('click', () => {
         },
         error: (xhr, textStatus, errorThrown) => console.log(xhr.responseText)
     });
+}
+
+banReasonInput.addEventListener('keyup', (event) => {
+   if (event.code === "Enter") {
+       banCharacter();
+   } 
+});
+
+banCharacterButton.addEventListener('click', () => {
+    banCharacter();
 });
 
 unbanCharacterButton.addEventListener('click', () => {

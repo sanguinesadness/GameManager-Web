@@ -1,4 +1,4 @@
-﻿@model User
+﻿@model GameManager.ViewModels.EditUserViewModel
 @{
     ViewData["Title"] = "Account";
     if (User.IsInRole("Player"))
@@ -27,9 +27,9 @@
     <div class="right-section">
         <span class="title">Изменение данных об аккаунте</span>
         <div class="middle-block edit-user-form__wrapper">
-            <form name="edit-user-form" onsubmit="return false">
-                <div class="input-grid">
-                    <input hidden id="id" type="text" value="@Model.Id">
+            <form method="post" name="edit-user-form" onsubmit="return false">
+                <div class="input-grid" asp-validation-summary="None">
+                    <input hidden id="id" type="text" value="@Model.Id" asp-for="Id">
                     <div class="input-box upper-placeholder tooltip">
                         <label for="username">Имя пользователя</label>
                         <input disabled id="username" type="text" tabindex="1"
@@ -39,28 +39,29 @@
                     <div class="input-box upper-placeholder">
                         <label for="email">Электронная почта</label>
                         <input id="email" type="email" tabindex="3"
-                               value="@Model.Email">
+                               value="@Model.Email" asp-for="Email">
                         <span class="error-label">
                             <span class="icon"></span>
-                            <span class="text"></span>
+                            <span class="text" asp-validation-for="Email"></span>
                         </span>
                     </div>
                     <div class="input-box upper-placeholder">
                         <label for="birthdate">Дата рождения</label>
                         <input id="birthdate" type="date" min="1900-01-01"
                                onChange="this.setAttribute('value', this.value)" tabindex="4"
-                               value="@Model.BirthDate.ToString("yyyy-MM-dd")">
+                               value="@Model.BirthDate.ToString("yyyy-MM-dd")"
+                               asp-for="BirthDate">
                         <span class="error-label">
                             <span class="icon"></span>
-                            <span class="text"></span>
+                            <span class="text" asp-validation-for="BirthDate"></span>
                         </span>
                     </div>
                     <div class="input-box upper-placeholder">
                         <label for="new-password">Новый пароль</label>
-                        <input class="without-hover-up" type="password" id="new-password" tabindex="2">
+                        <input asp-for="NewPassword" type="password" id="new-password" tabindex="2">
                         <span class="error-label">
                             <span class="icon"></span>
-                            <span class="text"></span>
+                            <span class="text" asp-validation-for="NewPassword"></span>
                         </span>
                     </div>
                     <div class="input-box">
@@ -69,17 +70,13 @@
                             <input type="radio" name="genderRadioButton" id="gender-male" value="Мужской" genderId="1">
                             <input type="radio" name="genderRadioButton" id="gender-female" value="Женский" genderId="2">
                             <input type="radio" name="genderRadioButton" id="gender-other" value="Другое" genderId="3">
-                            <input hidden id="gender-result" value="@Model.GenderId" />
+                            <input hidden id="gender-result" value="@Model.GenderId" asp-for="GenderId"/>
                         </div>
-                        <span class="error-label">
-                            <span class="icon"></span>
-                            <span class="text"></span>
-                        </span>
                     </div>
                 </div>
                 <div class="buttons">
-                    <button id="discard-changes-button" class="button" tabindex="6">Сбросить</button>
-                    <button id="save-changes-button" class="accent" tabindex="7">Сохранить</button>
+                    <button type="button" id="discard-changes-button" class="button" tabindex="6">Сбросить</button>
+                    <button type="button" id="save-changes-button" class="accent" tabindex="7">Сохранить</button>
                 </div>
             </form>
         </div>
@@ -122,11 +119,8 @@
         <div class="dialog-box__content">
             <span class="dialog-box__message">Введите текущий пароль для подтверждения изменения данных:</span>
             <div class="input-box">
-                <input id="old-password" class="without-hover-up" type="password" placeholder="Текущий пароль" />
-                <span class="error-label without-hover-up">
-                    <span class="icon"></span>
-                    <span class="text"></span>
-                </span>
+                <input id="old-password" class="no-indicators"
+                       type="password" placeholder="Текущий пароль"/>
             </div>
         </div>
         <div class="dialog-box__buttons">
@@ -140,12 +134,21 @@
 <div id="no-changes-dialog-box" class="dialog-wrapper" hidden>
     <div class="dialog-box">
         <h3 class="dialog-box__title fault">Изменение данных</h3>
-        <p class="dialog-box__message">Введите новое значение хотя бы в одно поле.</p>
+        <p class="dialog-box__message">Измените хотя бы одно поле.</p>
         <button class="dialog-box__button close accent without-hover-up">Ок</button>
     </div>
 </div>
 
 @* Hidden dialog box #4 *@
+<div id="failed-changes-dialog-box" class="dialog-wrapper" hidden>
+    <div class="dialog-box">
+        <h3 class="dialog-box__title fault">Ошибка</h3>
+        <p class="dialog-box__message">Ошибка.</p>
+        <button class="dialog-box__button close accent without-hover-up">Ок</button>
+    </div>
+</div>
+
+@* Hidden dialog box #5 *@
 <div id="successful-changes-dialog-box" class="dialog-wrapper" hidden>
     <div class="dialog-box">
         <h3 class="dialog-box__title success">Изменение данных</h3>
@@ -160,7 +163,7 @@
     document.getElementById('account-link').classList.add('selected');
 </script>
 <script src="~/js/Account/init.js" asp-append-version="true"></script>
-<script src="~/js/Account/initialDataRemember.js" asp-append-version="true"></script>
+<script src="~/js/Account/initialDataManager.js" asp-append-version="true"></script>
 v<script src="~/js/Account/actionSelection.js" asp-append-version="true"></script>
 <script src="~/js/Account/editFormHandler.js" asp-append-version="true"></script>
 <script src="~/js/Shared/setMaxDate.js" asp-append-version="true"></script>
